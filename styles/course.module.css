@@ -1,0 +1,44 @@
+.gridContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 0px 1px;
+  grid-template-areas:
+    "courseDescript courseDescript courseDescript courseDescript"
+    "lessonPlan editor editor comments"
+    "lessonPlan editor editor comments";
+}
+
+.courseDescript {
+  grid-area: courseDescript;
+}
+
+.coursePlan {
+  grid-area: lessonPlan;
+}
+.lesson {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  display: block;
+  transition: 0.4s;
+}
+
+.lesson:hover {
+  background-color: #ccc;
+}
+
+.editor {
+  grid-area: editor;
+  /* background-color: lightgrey; */
+  padding: 20px;
+}
+
+.comments {
+  grid-area: comments;
+}

@@ -1,0 +1,172 @@
+{
+    "lessons": [
+        {
+            "id": 1234,
+            "title": "Wake up",
+            "content": "<h1>Put on an alarm</h1>"
+        },
+        {
+            "id": 1235,
+            "title": "Drink water",
+            "content": "<h1>Always have a glass of water ready next to your bed</h1>"
+        }
+    ],
+    "course": [
+        {
+            "id": 2345,
+            "childLessons": [
+                {
+                    "id": 1234,
+                    "title": "Wake up",
+                    "content": {
+                        "blocks": [
+                            {
+                                "key": "16d0k",
+                                "text": "",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [],
+                                "entityRanges": [],
+                                "data": {}
+                            },
+                            {
+                                "key": "98peq",
+                                "text": "Wake up at a regular time ",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [],
+                                "entityRanges": [],
+                                "data": {}
+                            },
+                            {
+                                "key": "6lbia",
+                                "text": "",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [],
+                                "entityRanges": [],
+                                "data": {}
+                            },
+                            {
+                                "key": "49tel",
+                                "text": "Sleep is essential, you should make it a priority.",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [
+                                    {
+                                        "offset": 0,
+                                        "length": 20,
+                                        "style": "BOLD"
+                                    }
+                                ],
+                                "entityRanges": [],
+                                "data": {}
+                            },
+                            {
+                                "key": "fe2gn",
+                                "text": "",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [],
+                                "entityRanges": [],
+                                "data": {}
+                            }
+                        ],
+                        "entityMap": {}
+                    }
+                },
+                {
+                    "id": 1235,
+                    "title": "Drink water",
+                    "content": {
+                        "blocks": [
+                            {
+                                "key": "16d0k",
+                                "text": "",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [],
+                                "entityRanges": [],
+                                "data": {}
+                            },
+                            {
+                                "key": "98peq",
+                                "text": "Drink at least 1 Liter and half per day, even more depending on your body mass.",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [],
+                                "entityRanges": [],
+                                "data": {}
+                            },
+                            {
+                                "key": "68hv8",
+                                "text": "",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [],
+                                "entityRanges": [],
+                                "data": {}
+                            },
+                            {
+                                "key": "49tel",
+                                "text": "Track your water intake",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [
+                                    {
+                                        "offset": 0,
+                                        "length": 23,
+                                        "style": "BOLD"
+                                    }
+                                ],
+                                "entityRanges": [],
+                                "data": {}
+                            },
+                            {
+                                "key": "ciuah",
+                                "text": "",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [],
+                                "entityRanges": [],
+                                "data": {}
+                            },
+                            {
+                                "key": "1jbjq",
+                                "text": "Have a water bottle or glass next to you at all time",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [
+                                    {
+                                        "offset": 0,
+                                        "length": 29,
+                                        "style": "BOLD"
+                                    }
+                                ],
+                                "entityRanges": [],
+                                "data": {}
+                            },
+                            {
+                                "key": "fe2gn",
+                                "text": "",
+                                "type": "unstyled",
+                                "depth": 0,
+                                "inlineStyleRanges": [],
+                                "entityRanges": [],
+                                "data": {}
+                            }
+                        ],
+                        "entityMap": {}
+                    }
+                }
+            ],
+            "title": "How to wakeup energized ?",
+            "access": "public",
+            "category": "freebie",
+            "students": [
+                "Melanie",
+                "Joe"
+            ]
+        }
+    ]
+}
