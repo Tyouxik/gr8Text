@@ -23,8 +23,8 @@ export default function LessonContent(props) {
           toggleStateFunction={setIsEditable}
         />
       </div>
-      {isEditable && lesson && <ContentEditor lesson={lesson} />}
-      {!isEditable && lesson && <ContentViewer lesson={lesson} />}
+      {isEditable && lesson.content && <ContentEditor lesson={lesson} />}
+      {!isEditable && lesson.content && <ContentViewer lesson={lesson} />}
     </div>
   );
 }
