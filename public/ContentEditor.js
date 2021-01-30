@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, useState } from "react";
 import {
   Editor,
   EditorState,
@@ -7,6 +7,8 @@ import {
   convertFromRaw,
 } from "draft-js";
 
+import { styleMap } from "./stylemap";
+import styles from "../styles/contentEditor.module.css";
 export default class ContentEditor extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +17,7 @@ export default class ContentEditor extends Component {
         convertFromRaw(this.props.lesson.content)
       ),
       showToolbar: false,
+      showColorToolbar: false,
       windowWidth: 0,
       toolbarMeasures: {
         w: 0,
@@ -32,7 +35,6 @@ export default class ContentEditor extends Component {
         x: 0,
         y: 0,
       },
-      showRawData: false,
     };
 
     this.focus = () => this.editor.focus();
@@ -62,6 +64,7 @@ export default class ContentEditor extends Component {
 
   // 2- Identify the selection coordinates
   setSelectionXY = () => {
+    console.log(r);
     var r = window.getSelection().getRangeAt(0).getBoundingClientRect();
     var relative = document.body.parentNode.getBoundingClientRect();
     // 2-a Set the selection coordinates in the state
@@ -158,7 +161,7 @@ export default class ContentEditor extends Component {
     return false;
   };
 
-  toggleToolbar = (inlineStyle) => {
+  toggleInlineToolbar = (inlineStyle) => {
     this.onChange(
       RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle)
     );
@@ -199,7 +202,15 @@ export default class ContentEditor extends Component {
           }}
           style={toolbarStyle}
         >
-          <ToolBar editorState={editorState} onToggle={this.toggleToolbar} />
+          <InlineToolBar
+            editorState={editorState}
+            onToggle={this.toggleInlineToolbar}
+          />
+          <ColorToolBar
+            editorState={editorState}
+            onToggle={this.toggleInlineToolbar}
+            showColorToolbar={this.state.showColorToolbar}
+          />
         </div>
         <div onClick={this.onClickEditor} onBlur={this.checkSelectedText}>
           <Editor
@@ -215,7 +226,7 @@ export default class ContentEditor extends Component {
             }}
           />
         </div>
-        <div style={{ marginTop: 40 }}>
+        {/* <div style={{ marginTop: 40 }}>
           <button
             onClick={() =>
               this.setState({ showRawData: !this.state.showRawData })
@@ -226,28 +237,11 @@ export default class ContentEditor extends Component {
           <br />
           {this.state.showRawData &&
             JSON.stringify(convertToRaw(editorState.getCurrentContent()))}
-        </div>
+        </div> */}
       </div>
     );
   }
 }
-
-// Custom overrides for each style
-const styleMap = {
-  CODE: {
-    backgroundColor: "rgba(0, 0, 0, 0.05)",
-    fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
-    fontSize: 16,
-    padding: 4,
-  },
-  BOLD: {
-    color: "#395296",
-    fontWeight: "bold",
-  },
-  ANYCUSTOMSTYLE: {
-    color: "#00e400",
-  },
-};
 
 class ToolbarButton extends Component {
   constructor() {
@@ -270,19 +264,19 @@ class ToolbarButton extends Component {
   }
 }
 
-var toolbarItems = [
+var inlineToolbarItems = [
   { label: "Bold", style: "BOLD" },
   { label: "Italic", style: "ITALIC" },
   { label: "Underline", style: "UNDERLINE" },
+  { label: "Strike", style: "STRIKETHROUGH" },
   { label: "Code", style: "CODE" },
-  { label: "Surprise", style: "ANYCUSTOMSTYLE" },
 ];
 
-const ToolBar = (props) => {
+const InlineToolBar = (props) => {
   var currentStyle = props.editorState.getCurrentInlineStyle();
   return (
     <div>
-      {toolbarItems.map((toolbarItem) => (
+      {inlineToolbarItems.map((toolbarItem) => (
         <ToolbarButton
           key={toolbarItem.label}
           active={currentStyle.has(toolbarItem.style)}
@@ -295,62 +289,44 @@ const ToolBar = (props) => {
   );
 };
 
-const initialData = {
-  blocks: [
-    {
-      key: "16d0k",
-      text: "You can edit this text.",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [{ offset: 0, length: 23, style: "BOLD" }],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "98peq",
-      text: "",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "ecmnc",
-      text:
-        "Luke Skywalker has vanished. In his absence, the sinister FIRST ORDER has risen from the ashes of the Empire and will not rest until Skywalker, the last Jedi, has been destroyed.",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [
-        { offset: 0, length: 14, style: "BOLD" },
-        { offset: 133, length: 9, style: "BOLD" },
-      ],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "fe2gn",
-      text: "",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {},
-    },
-    {
-      key: "4481k",
-      text:
-        "With the support of the REPUBLIC, General Leia Organa leads a brave RESISTANCE. She is desperate to find her brother Luke and gain his help in restoring peace and justice to the galaxy.",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [
-        { offset: 34, length: 19, style: "BOLD" },
-        { offset: 117, length: 4, style: "BOLD" },
-        { offset: 68, length: 10, style: "ANYCUSTOMSTYLE" },
-      ],
-      entityRanges: [],
-      data: {},
-    },
-  ],
-  entityMap: {},
+const textColorToolbarItems = [
+  { label: "red", style: "RED" },
+  { label: "blue", style: "BLUE" },
+  { label: "black", style: "BLACK" },
+  { label: "green", style: "GREEN" },
+];
+
+const ColorToolBar = (props) => {
+  var currentStyle = props.editorState.getCurrentInlineStyle();
+  const [showDropdown, setShowDropdown] = useState(true);
+
+  const showDropDown = (e) => {
+    e.preventDefault();
+    setShowDropdown(!showDropdown);
+  };
+
+  return (
+    <div>
+      <span onMouseDown={showDropDown}>Color</span>
+      <div
+        id="myDropdown"
+        className={
+          showDropdown
+            ? styles.dropdownContent
+            : `${styles.dropdownContent} ${styles.show}`
+        }
+      >
+        {textColorToolbarItems.map((toolbarItem) => (
+          <ToolbarButton
+            onMouseDown={showDropDown}
+            key={toolbarItem.label}
+            active={currentStyle.has(toolbarItem.style)}
+            label={toolbarItem.label}
+            onToggle={props.onToggle}
+            style={toolbarItem.style}
+          />
+        ))}
+      </div>
+    </div>
+  );
 };
