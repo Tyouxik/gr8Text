@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import { Editor, EditorState, convertFromRaw } from "draft-js";
 import "draft-js/dist/Draft.css";
+import { styleMap } from "./stylemap";
 
 export default function MyEditor(props) {
   const [editorState, setEditorState] = useState(() =>
@@ -16,6 +17,7 @@ export default function MyEditor(props) {
 
   return (
     <Editor
+      customStyleMap={styleMap}
       editorState={editorState}
       /* onChange={setEditorState} */
       readOnly={true}
