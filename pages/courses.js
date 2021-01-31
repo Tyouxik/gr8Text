@@ -14,7 +14,7 @@ export default function courses() {
   const coursesDisplay = courses ? (
     courses.map((course) => {
       return (
-        <div className={styles.card}>
+        <div className={styles.card} key={course.id}>
           <img
             className={styles.card_img}
             src="https://images.unsplash.com/photo-1503428593586-e225b39bddfe?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
@@ -28,5 +28,20 @@ export default function courses() {
     <></>
   );
 
-  return <div>{coursesDisplay}</div>;
+  const addCourse = async (e) => {
+    e.preventDefault();
+    console.log("I want to add a course");
+    const newCourseRef = await axios.post("/api/courses");
+    const newCourse = newCourseRef.data;
+    setCourses([newCourse, ...courses]);
+  };
+
+  return (
+    <div>
+      {coursesDisplay}
+      <div className={styles.card} onClick={addCourse}>
+        <p>Add a course</p>
+      </div>
+    </div>
+  );
 }
