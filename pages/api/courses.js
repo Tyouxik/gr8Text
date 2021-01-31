@@ -7,7 +7,7 @@ const handler = nc()
     const snapshot = await db.collection("courses").get();
     const courses = snapshot.docs.map(collectIdsAndData);
     console.log({ courses });
-    res.json({ courses });
+    res.json(courses);
   })
   .post(async (req, res) => {
     const course = {

@@ -7,7 +7,7 @@ export default function courses() {
 
   useEffect(async () => {
     const snapshot = await axios.get("/api/courses");
-    const courses = snapshot.data.courses;
+    const courses = snapshot.data;
     setCourses(courses);
   }, []);
 
@@ -30,12 +30,12 @@ export default function courses() {
 
   const addCourse = async (e) => {
     e.preventDefault();
-    console.log("I want to add a course");
     const newCourseRef = await axios.post("/api/courses");
     const newCourse = newCourseRef.data;
     setCourses([newCourse, ...courses]);
   };
 
+  console.log(courses);
   return (
     <div>
       {coursesDisplay}
