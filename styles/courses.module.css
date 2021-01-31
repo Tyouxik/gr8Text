@@ -1,0 +1,10 @@
+.card {
+  height: 350px;
+  width: 300px;
+  border: 2px dotted black;
+  margin: 5px;
+}
+.card_img {
+  max-height: 70%;
+  width: 100%;
+}
