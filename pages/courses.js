@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/courses.module.css";
+import Link from "next/link";
 
 export default function courses() {
   const [courses, setCourses] = useState([]);
+  const [newCourse, setNewCourse] = useState("");
 
   useEffect(async () => {
     const snapshot = await axios.get("/api/courses");
@@ -14,14 +16,16 @@ export default function courses() {
   const coursesDisplay = courses ? (
     courses.map((course) => {
       return (
-        <div className={styles.card} key={course.id}>
-          <img
-            className={styles.card_img}
-            src="https://images.unsplash.com/photo-1503428593586-e225b39bddfe?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-          />
-          <h4 className={styles.card_title}>{course.title}</h4>
-          <p className={styles.card_info}>{course.access}</p>
-        </div>
+        <Link href={`/course/${course.id}`} key={course.id}>
+          <div className={styles.card} key={course.id}>
+            <img
+              className={styles.card_img}
+              src="https://images.unsplash.com/photo-1503428593586-e225b39bddfe?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
+            />
+            <h4 className={styles.card_title}>{course.title}</h4>
+            <p className={styles.card_info}>{course.access}</p>
+          </div>
+        </Link>
       );
     })
   ) : (
@@ -30,17 +34,22 @@ export default function courses() {
 
   const addCourse = async (e) => {
     e.preventDefault();
-    const newCourseRef = await axios.post("/api/courses");
+    const newCourseRef = await axios.post("/api/courses", newCourse);
     const newCourse = newCourseRef.data;
     setCourses([newCourse, ...courses]);
+  };
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setNewCourse(value);
   };
 
   console.log(courses);
   return (
     <div>
       {coursesDisplay}
-      <div className={styles.card} onClick={addCourse}>
-        <p>Add a course</p>
+      <div className={styles.card}>
+        <input type="text" value={newCourse} onChange={handleChange} />
+        <button onClick={addCourse}>Add a course</button>
       </div>
     </div>
   );
