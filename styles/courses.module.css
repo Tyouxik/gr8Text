@@ -1,10 +1,103 @@
+.course_cards {
+  width: 100%;
+  padding: 0px 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+}
+
 .card {
   height: 350px;
-  width: 300px;
-  border: 2px dotted black;
-  margin: 5px;
+  max-width: 300px;
+  min-width: 250px;
+  border: 2px solid black;
+  margin: 15px 10px;
+  border-radius: 20px;
+  padding: 15px 15px;
 }
-.card_img {
+
+.img_holder {
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.img_holder_img {
   max-height: 70%;
   width: 100%;
+  border-radius: 20px;
+  object-fit: contain;
+}
+
+.img_holder span {
+  text-align: center;
+  font-size: large;
+  color: white;
+  background-color: rgb(150, 55, 214);
+  width: 110px;
+  padding: 5px 20px;
+  border-radius: 15px;
+  position: absolute;
+  left: 30%;
+  bottom: -10px;
+}
+
+.add_course {
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.add_course input {
+  width: 90%;
+  padding-bottom: 12px;
+  margin: 8px 0;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+.add_course input:focus {
+  border-bottom: 2px solid rgb(150, 55, 214);
+}
+.add_course select {
+  width: 90%;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
+.add_course button {
+  text-align: center;
+  font-size: large;
+  color: white;
+  background-color: rgb(150, 55, 214);
+  border-radius: 15px;
+  width: 150px;
+  padding: 5px 20px;
+  border: none;
+}
+
+.card_access_img {
+  height: 25px;
+  width: 25px;
+}
+.card_access {
+  display: grid;
+  grid-template-columns: 0.2fr 1.8fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "Icon Text";
+}
+
+.card_access_img {
+  grid-area: Icon;
+}
+
+.card_access_text {
+  margin: 0px;
+  grid-area: Text;
 }

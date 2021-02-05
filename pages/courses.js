@@ -46,8 +46,8 @@ export default function courses() {
 
   console.log(courses);
   return (
-    <div>
-      <div className={styles.card}>
+    <>
+      <div className={`${styles.add_course}`}>
         <input
           type="text"
           name="title"
@@ -63,7 +63,7 @@ export default function courses() {
         </select>
         <button onClick={addCourse}>Add a course</button>
       </div>
-      {coursesDisplay}
-    </div>
+      <div className={styles.course_cards}>{coursesDisplay}</div>
+    </>
   );
 }
