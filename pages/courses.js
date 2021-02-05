@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function courses() {
   const [courses, setCourses] = useState([]);
-  const [newCourse, setNewCourse] = useState("");
+  const [newCourseTitle, setNewCourseTitle] = useState("");
 
   useEffect(async () => {
     const snapshot = await axios.get("/api/courses");
@@ -34,13 +34,15 @@ export default function courses() {
 
   const addCourse = async (e) => {
     e.preventDefault();
-    const newCourseRef = await axios.post("/api/courses", newCourse);
+    const newCourseRef = await axios.post("/api/courses", { newCourseTitle });
     const newCourse = newCourseRef.data;
+    console.log({ newCourse });
     setCourses([newCourse, ...courses]);
   };
+
   const handleChange = (e) => {
     const { value } = e.target;
-    setNewCourse(value);
+    setNewCourseTitle(value);
   };
 
   console.log(courses);
@@ -48,7 +50,7 @@ export default function courses() {
     <div>
       {coursesDisplay}
       <div className={styles.card}>
-        <input type="text" value={newCourse} onChange={handleChange} />
+        <input type="text" value={newCourseTitle} onChange={handleChange} />
         <button onClick={addCourse}>Add a course</button>
       </div>
     </div>

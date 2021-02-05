@@ -6,12 +6,12 @@ const handler = nc()
   .get(async (req, res) => {
     const snapshot = await db.collection("courses").get();
     const courses = snapshot.docs.map(collectIdsAndData);
-    console.log({ courses });
     res.json(courses);
   })
   .post(async (req, res) => {
+    const { newCourseTitle } = req.body;
     const course = {
-      title: "Hello World",
+      title: newCourseTitle,
       category: "freebie",
       access: "private",
     };
