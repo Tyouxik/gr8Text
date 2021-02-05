@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/courses.module.css";
-import Link from "next/link";
+
+import CourseCard from "../public/Components/CourseCard";
 
 export default function courses() {
   const [courses, setCourses] = useState([]);
   const [newCourseTitle, setNewCourseTitle] = useState("");
+  const [newCourseCategory, setNewCourseCategory] = useState("Online Training");
 
   useEffect(async () => {
     const snapshot = await axios.get("/api/courses");
@@ -15,18 +17,7 @@ export default function courses() {
 
   const coursesDisplay = courses ? (
     courses.map((course) => {
-      return (
-        <Link href={`/course/${course.id}`} key={course.id}>
-          <div className={styles.card} key={course.id}>
-            <img
-              className={styles.card_img}
-              src="https://images.unsplash.com/photo-1503428593586-e225b39bddfe?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"
-            />
-            <h4 className={styles.card_title}>{course.title}</h4>
-            <p className={styles.card_info}>{course.access}</p>
-          </div>
-        </Link>
-      );
+      return <CourseCard course={course} key={course.id} />;
     })
   ) : (
     <></>
@@ -34,25 +25,45 @@ export default function courses() {
 
   const addCourse = async (e) => {
     e.preventDefault();
-    const newCourseRef = await axios.post("/api/courses", { newCourseTitle });
+    const newCourseRef = await axios.post("/api/courses", {
+      newCourseTitle,
+      newCourseCategory,
+    });
     const newCourse = newCourseRef.data;
     console.log({ newCourse });
     setCourses([newCourse, ...courses]);
   };
 
   const handleChange = (e) => {
-    const { value } = e.target;
-    setNewCourseTitle(value);
+    const { value, name } = e.target;
+    if (name === "title") {
+      setNewCourseTitle(value);
+    }
+    if (name === "category") {
+      setNewCourseCategory(value);
+    }
   };
 
   console.log(courses);
   return (
     <div>
-      {coursesDisplay}
       <div className={styles.card}>
-        <input type="text" value={newCourseTitle} onChange={handleChange} />
+        <input
+          type="text"
+          name="title"
+          value={newCourseTitle}
+          onChange={handleChange}
+          placeholder="Course Title"
+        />
+        <select name="category" id="category" onChange={handleChange}>
+          <option value="Online Training">Online Training</option>
+          <option value="Offline Training">Offline Training</option>
+          <option value="Coaching">Coaching</option>
+          <option value="Consultation">Consultation</option>
+        </select>
         <button onClick={addCourse}>Add a course</button>
       </div>
+      {coursesDisplay}
     </div>
   );
 }
