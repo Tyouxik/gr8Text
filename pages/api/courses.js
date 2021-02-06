@@ -9,10 +9,11 @@ const handler = nc()
     res.json(courses);
   })
   .post(async (req, res) => {
-    const { newCourseTitle } = req.body;
+    const { newCourseTitle, newCourseCategory, newCoursePrice } = req.body;
     const course = {
       title: newCourseTitle,
-      category: "freebie",
+      category: newCourseCategory,
+      price: newCoursePrice,
       access: "private",
     };
     const docRef = await db.collection("courses").add(course);

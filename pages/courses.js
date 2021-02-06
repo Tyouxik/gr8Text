@@ -8,6 +8,7 @@ export default function courses() {
   const [courses, setCourses] = useState([]);
   const [newCourseTitle, setNewCourseTitle] = useState("");
   const [newCourseCategory, setNewCourseCategory] = useState("Online Training");
+  const [newCoursePrice, setNewCoursePrice] = useState("Free");
   const [showAddCourse, setShowAddCourse] = useState(false);
 
   useEffect(async () => {
@@ -29,12 +30,14 @@ export default function courses() {
     const newCourseRef = await axios.post("/api/courses", {
       newCourseTitle,
       newCourseCategory,
+      newCoursePrice,
     });
     const newCourse = newCourseRef.data;
     setCourses([newCourse, ...courses]);
     setShowAddCourse(false);
     setNewCourseTitle("");
     setNewCourseCategory("Online Training");
+    setNewCoursePrice("Free");
   };
 
   const handleChange = (e) => {
@@ -45,6 +48,9 @@ export default function courses() {
     if (name === "category") {
       setNewCourseCategory(value);
     }
+    if (name === "price") {
+      setNewCoursePrice(value);
+    }
   };
   const toggleNewCourse = () => {
     setShowAddCourse(!showAddCourse);
@@ -53,11 +59,10 @@ export default function courses() {
   console.log(courses);
   return (
     <>
-      {!showAddCourse && (
-        <div onClick={toggleNewCourse} className={styles.add_course_btn}>
-          New Course
-        </div>
-      )}
+      <div onClick={toggleNewCourse} className={styles.add_course_btn}>
+        New Course
+      </div>
+
       {showAddCourse && (
         <>
           <div
@@ -77,6 +82,11 @@ export default function courses() {
               <option value="Offline Training">Offline Training</option>
               <option value="Coaching">Coaching</option>
               <option value="Consultation">Consultation</option>
+            </select>
+
+            <select name="price" id="price" onChange={handleChange}>
+              <option value="Free">Free</option>
+              <option value="Premium">Premium</option>
             </select>
             <button className={styles.add_course_btn} onClick={addCourse}>
               Add a course
