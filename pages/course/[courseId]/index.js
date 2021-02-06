@@ -11,27 +11,57 @@ import LessonEditor from "../../../public/Components/LessonContent";
 import axios from "axios";
 
 export default function Course() {
-  const [currentCourse, setCurrentCourse] = useState();
   const router = useRouter();
   const { courseId } = router.query;
 
+  const [course, setCourse] = useState();
+  const [lessons, setLessons] = useState();
+  const [newLessonTitle, setNewLessonTitle] = useState("");
+
   useEffect(async () => {
     const snapshot = await axios.get(`/api/course/${courseId}`);
-    const course = snapshot.data;
-    console.log(course.childLessons);
-    setCurrentCourse(course);
+    const course = snapshot.data.course;
+    const lessons = snapshot.data.lessons;
+    setCourse(course);
+    setLessons(lessons);
   }, []);
 
-  const handleCourseDelete = async () => {
+  const deleteCourse = async () => {
     console.log(courseId);
     await axios.delete(`/api/course/${courseId}`);
     router.push("/courses");
   };
 
+  const addLesson = async () => {
+    console.log("I want to add a lesson");
+    const newLessonRef = await axios.post(`/api/course/${courseId}/addlesson`, {
+      newLessonTitle,
+    });
+    const newLesson = newLessonRef.data;
+    setLessons([...lessons, newLesson]);
+    setNewLessonTitle("");
+  };
+  const deleteLesson = async (id) => {
+    console.log("I WANT TO DELETE A LESSON", id);
+    await axios.delete(`/api/course/${courseId}/lesson/${id}`);
+    const newLessonList = lessons.filter((lesson) => lesson.id !== id);
+    setLessons(newLessonList);
+  };
+
+  if (!lessons || !course) {
+    return <></>;
+  }
   return (
     <main className={styles.gridContainer}>
-      <CourseDescript course={currentCourse} onRemove={handleCourseDelete} />
-      {/* <CourseLessonPlan course={currentCourse} /> */}
+      <CourseDescript course={course} onRemove={deleteCourse} />
+      <CourseLessonPlan
+        courseId={course.id}
+        lessons={lessons}
+        addLesson={addLesson}
+        deleteLesson={deleteLesson}
+        newLessonTitle={newLessonTitle}
+        setNewLessonTitle={setNewLessonTitle}
+      />
       <div className={styles.editor}>
         <p> Select a lesson</p>
         <p>View the lesson as a student would</p>

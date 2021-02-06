@@ -1,11 +1,10 @@
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: content-fit auto;
   gap: 0px 1px;
   grid-template-areas:
     "courseDescript courseDescript courseDescript courseDescript"
-    "lessonPlan editor editor comments"
     "lessonPlan editor editor comments";
 }
 
@@ -17,20 +16,90 @@
   grid-area: lessonPlan;
 }
 .lesson {
+  display: grid;
+  grid-template-columns: 1.6fr 0.4fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "Title deleteButton";
   background-color: #eee;
   color: #444;
   cursor: pointer;
   padding: 18px;
   width: 100%;
   text-align: left;
-  border: none;
-  outline: none;
-  display: block;
   transition: 0.4s;
 }
 
 .lesson:hover {
   background-color: #ccc;
+}
+.lesson h2 {
+  margin: 0px;
+  padding: 0px;
+}
+
+.lesson h3 {
+  grid-area: Title;
+  margin: 0px;
+  padding: 0px;
+}
+
+.lesson button {
+  grid-area: deleteButton;
+  font-size: larger;
+  color: red;
+  border: 1px solid red;
+  background-color: white;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 50%;
+  outline: none;
+}
+
+.lesson button:hover {
+  color: white;
+  font-size: larger;
+  border: 1px solid red;
+  background-color: red;
+}
+
+.add_lesson {
+  display: grid;
+  grid-template-columns: 1.6fr 0.4fr;
+  grid-template-rows: 1fr;
+  gap: 5px 5px;
+  grid-template-areas: "Input Button";
+  padding: 5px;
+}
+
+.add_lesson input {
+  grid-area: Input;
+  padding-left: 18px;
+  /* max-width: 70%; */
+  padding-bottom: 12px;
+  margin: 8px 0;
+  border: none;
+  outline: none;
+  font-size: 20px;
+}
+.add_lesson input:focus {
+  border-bottom: 2px solid rgb(150, 55, 214);
+}
+
+.add_lesson button {
+  grid-area: Button;
+
+  font-size: larger;
+  color: rgb(150, 55, 214);
+  border: 1px solid rgb(150, 55, 214);
+  background-color: white;
+  padding: 5px 10px;
+  margin: 10px;
+}
+.add_lesson button:hover {
+  color: white;
+  border: 1.5px solid rgb(150, 55, 214);
+  background-color: rgb(150, 55, 214);
 }
 
 .editor {
