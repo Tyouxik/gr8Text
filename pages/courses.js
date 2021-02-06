@@ -31,8 +31,10 @@ export default function courses() {
       newCourseCategory,
     });
     const newCourse = newCourseRef.data;
-    console.log({ newCourse });
     setCourses([newCourse, ...courses]);
+    setShowAddCourse(false);
+    setNewCourseTitle("");
+    setNewCourseCategory("Online Training");
   };
 
   const handleChange = (e) => {
@@ -51,11 +53,17 @@ export default function courses() {
   console.log(courses);
   return (
     <>
-      <div onClick={toggleNewCourse} className={styles.add_course_btn}>
-        New Course
-      </div>
+      {!showAddCourse && (
+        <div onClick={toggleNewCourse} className={styles.add_course_btn}>
+          New Course
+        </div>
+      )}
       {showAddCourse && (
         <>
+          <div
+            className={styles.add_course_blurred_background}
+            onClick={toggleNewCourse}
+          ></div>
           <div className={`${styles.add_course}`}>
             <input
               type="text"
