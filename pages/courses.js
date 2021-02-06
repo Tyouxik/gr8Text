@@ -55,8 +55,6 @@ export default function courses() {
   const toggleNewCourse = () => {
     setShowAddCourse(!showAddCourse);
   };
-
-  console.log(courses);
   return (
     <>
       <div onClick={toggleNewCourse} className={styles.add_course_btn}>

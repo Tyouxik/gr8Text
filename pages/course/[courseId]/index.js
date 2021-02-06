@@ -8,21 +8,24 @@ import data from "../../../public/lessons.json";
 import CourseDescript from "../../../public/Components/CourseDescript";
 import CourseLessonPlan from "../../../public/Components/CourseLessonPlan";
 import LessonEditor from "../../../public/Components/LessonContent";
+import axios from "axios";
 
 export default function Course() {
   const [currentCourse, setCurrentCourse] = useState();
   const router = useRouter();
   const { courseId } = router.query;
 
-  useEffect(() => {
-    const course = data.course.filter((el) => el.id === +courseId);
-    setCurrentCourse(course[0]);
-  });
+  useEffect(async () => {
+    const snapshot = await axios.get(`/api/course/${courseId}`);
+    const course = snapshot.data;
+    console.log(course);
+    setCurrentCourse(course);
+  }, []);
 
   return (
     <main className={styles.gridContainer}>
       <CourseDescript course={currentCourse} />
-      <CourseLessonPlan course={currentCourse} />
+      {/* <CourseLessonPlan course={currentCourse} /> */}
       <div className={styles.editor}>
         <p> Select a lesson</p>
         <p>View the lesson as a student would</p>
