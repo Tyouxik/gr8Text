@@ -8,8 +8,8 @@ export default function CourseCard({ course }) {
     { icon: "../images/access_icon.svg", text: course.access },
     {
       icon: "../images/lesson_icon.svg",
-      text: course.childLessons
-        ? `${course.childLessons.length} x lessons`
+      text: course.lessons
+        ? `${course.lessons.length} x lessons`
         : "No lessons yet",
     },
     { icon: "../images/category_icon.svg", text: course.category },

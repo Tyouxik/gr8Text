@@ -4,13 +4,26 @@ import { collectIdsAndData } from "../../../utils/utilities";
 
 const handler = nc()
   .get(async (req, res) => {
-    const { courseId } = req.query;
-    const snapshot = await db.doc(`/courses/${courseId}`).get();
-    const course = snapshot.data();
-    if (!course) {
-      res.json("No course");
-    } else {
-      res.json(course);
+    try {
+      const { courseId } = req.query;
+      const courseRef = db.collection("courses").doc(courseId);
+      const lessonsRef = courseRef.collection("lessons");
+
+      const courseInfo = await courseRef.get();
+      const course = collectIdsAndData(courseInfo);
+
+      const lessonsListRef = await lessonsRef.get();
+      const lessons = lessonsListRef.docs.map(collectIdsAndData);
+
+      console.log({ course, lessons });
+      if (!course) {
+        res.json("No course");
+      } else {
+        const { title, price, category, access, id } = course;
+        res.json({ course, lessons });
+      }
+    } catch (error) {
+      console.log(error);
     }
   })
   .delete(async (req, res) => {

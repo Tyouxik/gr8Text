@@ -17,7 +17,7 @@ export default function Lesson() {
 
   useEffect(() => {
     const course = data.course.filter((el) => el.id === +courseId)[0];
-    const lesson = course.childLessons.filter((el) => el.id === +lessonId)[0];
+    const lesson = course.lessons.filter((el) => el.id === +lessonId)[0];
     setCurrentCourse(course);
     setCurrentLesson(lesson);
   }, [courseId, lessonId]);
