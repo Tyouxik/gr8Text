@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "../../styles/course.module.css";
+import DeleteButton from "../Atoms/DeleteButton";
 
-export default function CourseDescript(props) {
-  if (!props.course) return <></>;
-  const { title, access, category, students } = props.course;
+export default function CourseDescript({ course, onRemove }) {
+  if (!course) return <></>;
+  const { title, access, category, students } = course;
 
   return (
     <>
@@ -15,6 +16,7 @@ export default function CourseDescript(props) {
           Current students:{" "}
           {students === undefined ? "no students yet" : students.join(", ")}
         </p>
+        <DeleteButton onRemove={onRemove} label="Delete course" />
       </div>
     </>
   );

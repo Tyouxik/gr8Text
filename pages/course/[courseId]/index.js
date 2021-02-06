@@ -18,13 +18,19 @@ export default function Course() {
   useEffect(async () => {
     const snapshot = await axios.get(`/api/course/${courseId}`);
     const course = snapshot.data;
-    console.log(course);
+    console.log(course.childLessons);
     setCurrentCourse(course);
   }, []);
 
+  const handleCourseDelete = async () => {
+    console.log(courseId);
+    await axios.delete(`/api/course/${courseId}`);
+    router.push("/courses");
+  };
+
   return (
     <main className={styles.gridContainer}>
-      <CourseDescript course={currentCourse} />
+      <CourseDescript course={currentCourse} onRemove={handleCourseDelete} />
       {/* <CourseLessonPlan course={currentCourse} /> */}
       <div className={styles.editor}>
         <p> Select a lesson</p>
