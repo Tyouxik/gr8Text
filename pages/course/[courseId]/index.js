@@ -1,13 +1,10 @@
 import React from "react";
 import styles from "../../../styles/course.module.css";
 import { useState, useEffect } from "react";
-import Link from "next/link";
-
 import { useRouter } from "next/router";
-import data from "../../../public/lessons.json";
 import CourseDescript from "../../../public/Components/CourseDescript";
 import CourseLessonPlan from "../../../public/Components/CourseLessonPlan";
-import LessonEditor from "../../../public/Components/LessonContent";
+import LessonContent from "../../../public/Components/LessonContent";
 import axios from "axios";
 
 export default function Course() {
@@ -16,6 +13,7 @@ export default function Course() {
 
   const [course, setCourse] = useState();
   const [lessons, setLessons] = useState();
+  const [activeLesson, setActiveLesson] = useState();
   const [newLessonTitle, setNewLessonTitle] = useState("");
 
   useEffect(async () => {
@@ -41,11 +39,16 @@ export default function Course() {
     setLessons([...lessons, newLesson]);
     setNewLessonTitle("");
   };
+
   const deleteLesson = async (id) => {
     console.log("I WANT TO DELETE A LESSON", id);
     await axios.delete(`/api/course/${courseId}/lesson/${id}`);
     const newLessonList = lessons.filter((lesson) => lesson.id !== id);
     setLessons(newLessonList);
+  };
+  const toggleActiveLesson = (id) => {
+    const lesson = lessons.filter((lesson) => lesson.id === id)[0];
+    setActiveLesson(lesson);
   };
 
   if (!lessons || !course) {
@@ -59,15 +62,11 @@ export default function Course() {
         lessons={lessons}
         addLesson={addLesson}
         deleteLesson={deleteLesson}
+        toggleActiveLesson={toggleActiveLesson}
         newLessonTitle={newLessonTitle}
         setNewLessonTitle={setNewLessonTitle}
       />
-      <div className={styles.editor}>
-        <p> Select a lesson</p>
-        <p>View the lesson as a student would</p>
-        <p>Switch to edit mode, to edit your lesson</p>
-        <p>See your notes and student note</p>
-      </div>
+      <LessonContent lesson={activeLesson} />
       <div className={styles.comments}>
         <div>
           <h1>Paola</h1>

@@ -7,6 +7,7 @@ export default function CourseLessonPlan({
   lessons,
   addLesson,
   deleteLesson,
+  toggleActiveLesson,
   newLessonTitle,
   setNewLessonTitle,
 }) {
@@ -19,7 +20,10 @@ export default function CourseLessonPlan({
 
   const lessonPlan = lessons.map((lesson) => {
     return (
-      <div className={styles.lesson}>
+      <div
+        className={styles.lesson}
+        onClick={() => toggleActiveLesson(lesson.id)}
+      >
         <h3>{lesson.title}</h3>
         <button onClick={() => deleteLesson(lesson.id)}>-</button>
       </div>
