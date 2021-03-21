@@ -9,12 +9,18 @@ const handler = nc()
     res.json(courses);
   })
   .post(async (req, res) => {
-    const { newCourseTitle, newCourseCategory, newCoursePrice } = req.body;
+    const {
+      newCourseTitle,
+      newCourseCategory,
+      newCoursePrice,
+      currentUser,
+    } = req.body;
     const course = {
       title: newCourseTitle,
       category: newCourseCategory,
       price: newCoursePrice,
       access: "private",
+      creator: currentUser,
     };
     const docRef = await db.collection("courses").add(course);
     const doc = await docRef.get();
