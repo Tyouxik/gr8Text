@@ -46,7 +46,11 @@ export default function CourseLessonPlan({
             onChange={handleChange}
             placeholder="Add a New lesson"
           />
-          <button className={styles.add_btn} onClick={addLesson}>
+          <button
+            disabled={newLessonTitle === ""}
+            className={styles.add_btn}
+            onClick={addLesson}
+          >
             +
           </button>
         </div>
