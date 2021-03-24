@@ -17,21 +17,15 @@ export default function Course() {
   const [newLessonTitle, setNewLessonTitle] = useState("");
 
   useEffect(async () => {
+    console.log("I am courseId in course page", courseId);
     const snapshot = await axios.get(`/api/course/${courseId}`);
     const course = snapshot.data.course;
     const lessons = snapshot.data.lessons;
     setCourse(course);
     setLessons(lessons);
-  }, []);
-
-  const deleteCourse = async () => {
-    console.log(courseId);
-    await axios.delete(`/api/course/${courseId}`);
-    router.push("/courses");
-  };
+  }, [router]);
 
   const addLesson = async () => {
-    console.log("I want to add a lesson");
     const newLessonRef = await axios.post(`/api/course/${courseId}/addlesson`, {
       newLessonTitle,
     });
@@ -41,11 +35,22 @@ export default function Course() {
   };
 
   const deleteLesson = async (id) => {
-    console.log("I WANT TO DELETE A LESSON", id);
     await axios.delete(`/api/course/${courseId}/lesson/${id}`);
     const newLessonList = lessons.filter((lesson) => lesson.id !== id);
     setLessons(newLessonList);
   };
+
+  const updateLesson = async (lessonKey) => {
+    console.log(`/api/course/${courseId}/lessons/${activeLesson.id}`);
+    //const lessonRef = await axios.post(`/api/course/${courseId}/lessons/${activeLesson.id}`)
+  };
+
+  const deleteCourse = async () => {
+    console.log(courseId);
+    await axios.delete(`/api/course/${courseId}`);
+    router.push("/courses");
+  };
+
   const toggleActiveLesson = (id) => {
     const lesson = lessons.filter((lesson) => lesson.id === id)[0];
     setActiveLesson(lesson);
@@ -54,6 +59,7 @@ export default function Course() {
   if (!lessons || !course) {
     return <></>;
   }
+
   return (
     <main className={styles.gridContainer}>
       <CourseDescript course={course} onRemove={deleteCourse} />
@@ -66,14 +72,15 @@ export default function Course() {
         newLessonTitle={newLessonTitle}
         setNewLessonTitle={setNewLessonTitle}
       />
-      <LessonContent lesson={activeLesson} />
-      <div className={styles.comments}>
-        <div>
-          <h1>Paola</h1>
-          <p>There is a typo on the first paragraph</p>
-          <button>Resolve</button>
-        </div>
-      </div>
+      {activeLesson ? (
+        <LessonContent
+          updateLesson={updateLesson}
+          activeLesson={activeLesson}
+          setActiveLesson={setActiveLesson}
+        />
+      ) : (
+        <></>
+      )}
     </main>
   );
 }
