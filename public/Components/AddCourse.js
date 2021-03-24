@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import styles from "../../styles/courses.module.css";
 
-export default function AddCourse({ courses, setCourses, toggleAddCourse }) {
+export default function AddCourse({
+  courses,
+  setCourses,
+  toggleAddCourse,
+  setShowAddCourse,
+}) {
   const [newCourseTitle, setNewCourseTitle] = useState("");
   const [newCourseCategory, setNewCourseCategory] = useState("Online Training");
   const [newCoursePrice, setNewCoursePrice] = useState("Free");

@@ -33,6 +33,7 @@ export default function courses() {
           toggleAddCourse={toggleAddCourse}
           courses={courses}
           setCourses={setCourses}
+          setShowAddCourse={setShowAddCourse}
         />
       )}
 
