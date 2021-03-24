@@ -8,12 +8,12 @@ export default function Home() {
       <Head>
         <title>Gr8Courses</title>
       </Head>
-      <div class={styles.gridContainer}>
-        <Navbar class={styles.Navbar} />
-        <div class={styles.Main}>
+      <div className={styles.gridContainer}>
+        <Navbar clasName={styles.Navbar} />
+        <div className={styles.Main}>
           <h1>Welcome to Gr8Courses</h1>
         </div>
-        <div class={styles.Footer}>
+        <div className={styles.Footer}>
           <h1>This is the footer</h1>
         </div>
       </div>
