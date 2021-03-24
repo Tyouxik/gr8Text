@@ -19,7 +19,7 @@ export default function CourseCard({ course }) {
   });
 
   return (
-    <Link href={`/course/${course.id}`}>
+    <Link href={`/course/${course.id}`} key={course.key}>
       <div className={styles.card}>
         <div className={styles.img_holder}>
           <img
