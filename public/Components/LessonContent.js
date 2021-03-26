@@ -12,10 +12,23 @@ export default function lessonContent({
   setIsEditable,
 }) {
   const [lessonContent, setLessonContent] = useState(activeLesson.content);
+  const [debouncedLessonContent, setDebouncedLessonContent] = useState();
+
+  useEffect(() => {
+    setLessonContent(activeLesson.content);
+  }, [activeLesson]);
+
+  useEffect(() => {
+    const timerId = setTimeout(
+      () => setDebouncedLessonContent(lessonContent),
+      3000
+    );
+    return () => clearTimeout(timerId);
+  }, [lessonContent]);
 
   useEffect(() => {
     updateLesson("content", lessonContent);
-  }, [lessonContent]);
+  }, [debouncedLessonContent]);
 
   if (!activeLesson) {
     return (
