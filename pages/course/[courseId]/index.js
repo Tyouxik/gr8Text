@@ -15,6 +15,7 @@ export default function Course() {
   const [lessons, setLessons] = useState();
   const [activeLesson, setActiveLesson] = useState();
   const [newLessonTitle, setNewLessonTitle] = useState("");
+  const [isEditable, setIsEditable] = useState(false);
 
   useEffect(async () => {
     console.log("I am courseId in course page", courseId);
@@ -40,9 +41,21 @@ export default function Course() {
     setLessons(newLessonList);
   };
 
-  const updateLesson = async (lessonKey) => {
-    console.log(`/api/course/${courseId}/lessons/${activeLesson.id}`);
-    //const lessonRef = await axios.post(`/api/course/${courseId}/lessons/${activeLesson.id}`)
+  const updateLesson = async (key, content) => {
+    const lessonRef = await axios.post(
+      `/api/course/${courseId}/lesson/${activeLesson.id}`,
+      { key, content }
+    );
+    console.log(lessonRef.data);
+    setActiveLesson(lessonRef.data);
+    const newLessons = lessons.map((lesson) => {
+      console.log(lesson.id === lessonRef.data.id);
+      if (lesson.id === lessonRef.data.id) {
+        return lessonRef.data;
+      }
+      return lesson;
+    });
+    setLessons(newLessons);
   };
 
   const deleteCourse = async () => {
@@ -52,8 +65,10 @@ export default function Course() {
   };
 
   const toggleActiveLesson = (id) => {
-    const lesson = lessons.filter((lesson) => lesson.id === id)[0];
-    setActiveLesson(lesson);
+    if (!isEditable) {
+      const lesson = lessons.filter((lesson) => lesson.id === id)[0];
+      setActiveLesson(lesson);
+    }
   };
 
   if (!lessons || !course) {
@@ -74,6 +89,8 @@ export default function Course() {
       />
       {activeLesson ? (
         <LessonContent
+          isEditable={isEditable}
+          setIsEditable={setIsEditable}
           updateLesson={updateLesson}
           activeLesson={activeLesson}
           setActiveLesson={setActiveLesson}
