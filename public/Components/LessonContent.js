@@ -1,19 +1,28 @@
 import React from "react";
 import styles from "../../styles/course.module.css";
+import ToggleSwitch from "../Atoms/ToggleSwitch";
+import { useState, useEffect } from "react";
+import ContentEditor from "./ContentEditor";
 
-import ToggleSwitch from "../../public/ToggleSwitch";
-import { useState } from "react";
-import ContentEditor from "../ContentEditor";
-import ContentViewer from "../ContentViewer";
+export default function lessonContent({
+  activeLesson,
+  setActiveLesson,
+  updateLesson,
+  isEditable,
+  setIsEditable,
+}) {
+  const [lessonContent, setLessonContent] = useState(activeLesson.content);
 
-export default function LessonContent({ lesson }) {
-  const [isEditable, setIsEditable] = useState(false);
-  if (!lesson || !lesson.content) {
+  useEffect(() => {
+    updateLesson("content", lessonContent);
+  }, [lessonContent]);
+
+  if (!activeLesson) {
     return (
       <div className={styles.editor}>
-        <p> Select a lesson</p>
-        <p>View the lesson as a student would</p>
-        <p>Switch to edit mode, to edit your lesson</p>
+        <p> Select a Lesson</p>
+        <p>View the Lesson as a student would</p>
+        <p>Switch to edit mode, to edit your Lesson</p>
         <p>See your notes and student note</p>
       </div>
     );
@@ -25,9 +34,13 @@ export default function LessonContent({ lesson }) {
             toggleState={isEditable}
             toggleStateFunction={setIsEditable}
           />
+          <ContentEditor
+            readOnly={!isEditable}
+            activeLesson={activeLesson}
+            lessonContent={lessonContent}
+            setLessonContent={setLessonContent}
+          />
         </div>
-        {isEditable && lesson.content && <ContentEditor lesson={lesson} />}
-        {!isEditable && lesson.content && <ContentViewer lesson={lesson} />}
       </div>
     );
   }
