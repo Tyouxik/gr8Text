@@ -42,20 +42,27 @@ export default function Course() {
   };
 
   const updateLesson = async (key, content) => {
-    const lessonRef = await axios.post(
-      `/api/course/${courseId}/lesson/${activeLesson.id}`,
-      { key, content }
+    console.log(
+      JSON.stringify(content) !== JSON.stringify(activeLesson.content)
     );
-    console.log(lessonRef.data);
-    setActiveLesson(lessonRef.data);
-    const newLessons = lessons.map((lesson) => {
-      console.log(lesson.id === lessonRef.data.id);
-      if (lesson.id === lessonRef.data.id) {
-        return lessonRef.data;
-      }
-      return lesson;
-    });
-    setLessons(newLessons);
+    if (
+      key === "content" &&
+      JSON.stringify(content) !== JSON.stringify(activeLesson.content)
+    ) {
+      const lessonRef = await axios.post(
+        `/api/course/${courseId}/lesson/${activeLesson.id}`,
+        { key, content }
+      );
+      setActiveLesson(lessonRef.data);
+      const newLessons = lessons.map((lesson) => {
+        console.log(lesson.id === lessonRef.data.id);
+        if (lesson.id === lessonRef.data.id) {
+          return lessonRef.data;
+        }
+        return lesson;
+      });
+      setLessons(newLessons);
+    }
   };
 
   const deleteCourse = async () => {
