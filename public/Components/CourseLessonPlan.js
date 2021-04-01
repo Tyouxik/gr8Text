@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "../../styles/course.module.css";
-import Link from "next/link";
 
 export default function CourseLessonPlan({
-  courseId,
   lessons,
   addLesson,
   deleteLesson,
