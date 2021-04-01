@@ -2,12 +2,13 @@ import React from "react";
 import styles from "../../styles/course.module.css";
 import ToggleSwitch from "../Atoms/ToggleSwitch";
 import { useState, useEffect } from "react";
+import { convertToRaw, convertFromRaw, ContentState } from "draft-js";
 import ContentEditor from "./ContentEditor";
 
 export default function lessonContent({
   activeLesson,
-  setActiveLesson,
   updateLesson,
+
   isEditable,
   setIsEditable,
 }) {

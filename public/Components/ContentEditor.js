@@ -5,31 +5,43 @@ import {
   convertFromHTML,
   convertToRaw,
   ContentState,
+  convertFromRaw,
 } from "draft-js";
 
 export default function ContentEditor({
   readOnly,
   activeLesson,
-  lessonContent,
   setLessonContent,
 }) {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  const [convertedContent, setConvertedContent] = useState(null);
+
+  const onChange = (editorstate) => {
+    const raw = convertToRaw(editorstate.getCurrentContent());
+    console.log(raw);
+
+    setLessonContent(raw);
+    setEditorState(editorstate);
+  };
 
   useEffect(() => {
-    setConvertedContent(convertToRaw(editorState.getCurrentContent()));
-    setLessonContent(convertedContent);
-  }, [editorState]);
+    if (activeLesson.content) {
+      setEditorState(() =>
+        EditorState.createWithContent(convertFromRaw(activeLesson.content))
+      );
+    } else {
+      setEditorState(() => EditorState.createEmpty());
+    }
+  }, [activeLesson.id]);
 
   return (
     <div style={styles.root}>
-      <div style={styles.editor} /* onClick={focus} */>
+      <div style={styles.editor} onClick={focus}>
         <Editor
           readOnly={readOnly}
           editorState={editorState}
-          onChange={setEditorState}
+          onChange={(e) => onChange(e)}
         />
       </div>
     </div>
