@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import {
   Editor,
   EditorState,
-  convertFromHTML,
   convertToRaw,
-  ContentState,
   convertFromRaw,
+  RichUtils,
 } from "draft-js";
+
+import EditorToolbar from "./EditorToolbar";
 
 export default function ContentEditor({
   readOnly,
@@ -35,8 +36,14 @@ export default function ContentEditor({
     }
   }, [activeLesson.id]);
 
+  //Change the inline Styling of the selected text
+  const onInlineToggle = (style) => {
+    onChange(RichUtils.toggleInlineStyle(editorState, style));
+  };
+
   return (
     <div style={styles.root}>
+      <EditorToolbar onInlineToggle={onInlineToggle} />
       <div style={styles.editor} onClick={focus}>
         <Editor
           readOnly={readOnly}
