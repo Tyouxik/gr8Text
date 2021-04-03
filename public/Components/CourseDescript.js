@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../../styles/course.module.css";
 import DeleteButton from "../Atoms/DeleteButton";
+import Link from "next/link";
 
 export default function CourseDescript({ course, onRemove }) {
   if (!course) return <></>;
@@ -9,6 +10,7 @@ export default function CourseDescript({ course, onRemove }) {
   return (
     <>
       <div className={styles.courseDescript}>
+        <Link href="/courses">Back to courses</Link>
         <h1>{title}</h1>
         <p>{access}</p>
         <p>{category}</p>
