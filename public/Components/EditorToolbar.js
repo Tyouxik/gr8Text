@@ -1,17 +1,19 @@
 import React from "react";
 import InlineToolBar from "./InlineToolBar";
+import BlockToolBar from "./BlockToolBar";
+import { MediaToolBar } from "./MediaToolBar";
 
 export default function EditorToolbar({
   onInlineToggle,
   editorState,
-  onH1Click,
-  addImage,
+  onBlockToggle,
+  promptForMedia,
 }) {
   return (
     <div>
       <InlineToolBar onInlineToggle={onInlineToggle} />
-      {/* <BlockToolBar editorState={editorState} onH1Click={onH1Click} />
-        <MediaToolBar addImage={addImage} /> */}
+      <BlockToolBar editorState={editorState} onBlockToggle={onBlockToggle} />
+      <MediaToolBar promptForMedia={promptForMedia} />
     </div>
   );
 }

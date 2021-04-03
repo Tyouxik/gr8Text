@@ -5,9 +5,12 @@ import {
   convertToRaw,
   convertFromRaw,
   RichUtils,
+  AtomicBlockUtils,
 } from "draft-js";
 
 import EditorToolbar from "./EditorToolbar";
+import MediaUrlInput from "./MediaUrlInput";
+import { blockRenderer } from "./EditorUtils";
 
 export default function ContentEditor({
   readOnly,
@@ -17,6 +20,10 @@ export default function ContentEditor({
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
+  const [url, setUrl] = useState("");
+  const [urlType, setUrlType] = useState("");
+  const [showMediaUrlInput, setShowMediaUrlInput] = useState(false);
+  const [altText, setAltText] = useState("");
 
   const onChange = (editorstate) => {
     const raw = convertToRaw(editorstate.getCurrentContent());
@@ -41,14 +48,62 @@ export default function ContentEditor({
     onChange(RichUtils.toggleInlineStyle(editorState, style));
   };
 
+  //Change the block type of the selected block
+  const onBlockToggle = (style) => {
+    onChange(RichUtils.toggleBlockType(editorState, style));
+  };
+
+  //Add a media to content editor
+  const promptForMedia = (type) => {
+    setShowMediaUrlInput(true);
+    setUrlType(type);
+  };
+
+  const confirmMedia = (e) => {
+    e.preventDefault();
+    const contentState = editorState.getCurrentContent();
+    const contentStateWithEntity = contentState.createEntity(
+      urlType,
+      "IMMUTABLE",
+      { src: url, alt: altText }
+    );
+    console.log(contentStateWithEntity, "this is my block");
+    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+    const newEditorState = EditorState.set(editorState, {
+      currentContent: contentStateWithEntity,
+    });
+    setEditorState(
+      AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, " ")
+    );
+    setShowMediaUrlInput(false);
+    setUrl("");
+    setUrlType("");
+    setAltText("");
+  };
+
   return (
     <div style={styles.root}>
-      <EditorToolbar onInlineToggle={onInlineToggle} />
+      <EditorToolbar
+        editorState={editorState}
+        onBlockToggle={onBlockToggle}
+        onInlineToggle={onInlineToggle}
+        promptForMedia={promptForMedia}
+      />
+      {showMediaUrlInput && (
+        <MediaUrlInput
+          url={url}
+          setUrl={setUrl}
+          altText={altText}
+          setAltText={setAltText}
+          confirmMedia={confirmMedia}
+        />
+      )}
       <div style={styles.editor} onClick={focus}>
         <Editor
           readOnly={readOnly}
           editorState={editorState}
           onChange={(e) => onChange(e)}
+          blockRendererFn={blockRenderer}
         />
       </div>
     </div>
