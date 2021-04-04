@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/ToggleSwitch.module.css";
+import styles from "../../styles/toggleSwitch.module.css";
 
 export default function ToggleSwitch({ toggleState, toggleStateFunction }) {
   const handleChange = (event) => {
