@@ -1,0 +1,23 @@
+.name {
+  display: inline;
+}
+
+.firstWord,
+.secondWord {
+  padding: 0px;
+  margin: 0px;
+  font-size: 20px;
+}
+
+.firstWord {
+  color: var(--primary);
+}
+
+.secondWord {
+  color: var(--black);
+}
+
+.firstWord::first-letter {
+  font-weight: bolder;
+  color: var(--white);
+}
