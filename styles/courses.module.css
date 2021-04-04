@@ -4,12 +4,12 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: start;
   align-items: baseline;
 }
 
 .card {
-  height: 350px;
+  /*  height: 350px; */
   max-width: 300px;
   min-width: 250px;
   border: 2px solid black;
@@ -34,7 +34,7 @@
   text-align: center;
   font-size: large;
   color: white;
-  background-color: rgb(150, 55, 214);
+  background-color: var(--primary);
   width: 110px;
   padding: 5px 20px;
   border-radius: 15px;

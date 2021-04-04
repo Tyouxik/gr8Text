@@ -3,6 +3,7 @@ import axios from "axios";
 import styles from "../styles/courses.module.css";
 import CourseCard from "../public/Components/CourseCard";
 import AddCourse from "../public/Components/AddCourse";
+import NavbarLoggedOut from "../public/Components/NavbarLoggedOut";
 
 export default function courses() {
   const [courses, setCourses] = useState([{}]);
@@ -36,10 +37,13 @@ export default function courses() {
           setShowAddCourse={setShowAddCourse}
         />
       )}
-
+      <NavbarLoggedOut />
       <div className={styles.course_cards}>
-        <div onClick={toggleAddCourse} className={styles.add_course_btn}>
-          New Course
+        <div
+          onClick={toggleAddCourse}
+          className={`${styles.card} ${styles.add_course_btn}`}
+        >
+          <p>New Course</p>
         </div>
         {coursesDisplay}
       </div>
