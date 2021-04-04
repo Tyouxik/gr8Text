@@ -1,3 +1,10 @@
+:root {
+  --primary: rgb(150, 55, 214);
+  --white: #ffffff;
+  --black: black;
+  --lightGrey: rgb(193, 193, 193);
+}
+
 html,
 body {
   padding: 0;
