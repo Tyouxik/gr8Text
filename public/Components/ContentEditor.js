@@ -13,7 +13,7 @@ import MediaUrlInput from "./MediaUrlInput";
 import { blockRenderer } from "./EditorUtils";
 
 export default function ContentEditor({
-  readOnly,
+  isEditable,
   activeLesson,
   setLessonContent,
 }) {
@@ -24,6 +24,15 @@ export default function ContentEditor({
   const [urlType, setUrlType] = useState("");
   const [showMediaUrlInput, setShowMediaUrlInput] = useState(false);
   const [altText, setAltText] = useState("");
+
+  useEffect(() => {
+    if (!isEditable) {
+      setUrl("");
+      setUrlType("");
+      setShowMediaUrlInput(false);
+      setAltText("");
+    }
+  }, [isEditable]);
 
   const onChange = (editorstate) => {
     const raw = convertToRaw(editorstate.getCurrentContent());
@@ -83,15 +92,18 @@ export default function ContentEditor({
 
   return (
     <div style={styles.root}>
-      <EditorToolbar
-        editorState={editorState}
-        onBlockToggle={onBlockToggle}
-        onInlineToggle={onInlineToggle}
-        promptForMedia={promptForMedia}
-      />
-      {showMediaUrlInput && (
+      {isEditable && (
+        <EditorToolbar
+          editorState={editorState}
+          onBlockToggle={onBlockToggle}
+          onInlineToggle={onInlineToggle}
+          promptForMedia={promptForMedia}
+        />
+      )}
+      {showMediaUrlInput && isEditable && (
         <MediaUrlInput
           url={url}
+          urlType={urlType}
           setUrl={setUrl}
           altText={altText}
           setAltText={setAltText}
@@ -100,7 +112,7 @@ export default function ContentEditor({
       )}
       <div style={styles.editor} onClick={focus}>
         <Editor
-          readOnly={readOnly}
+          readOnly={!isEditable}
           editorState={editorState}
           onChange={(e) => onChange(e)}
           blockRendererFn={blockRenderer}
@@ -114,7 +126,6 @@ const styles = {
   root: {
     fontFamily: "'Helvetica', sans-serif",
     padding: 20,
-    width: 600,
   },
   editor: {
     border: "1px solid #ccc",

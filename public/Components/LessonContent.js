@@ -49,7 +49,7 @@ export default function lessonContent({
             toggleStateFunction={setIsEditable}
           />
           <ContentEditor
-            readOnly={!isEditable}
+            isEditable={isEditable}
             activeLesson={activeLesson}
             lessonContent={lessonContent}
             setLessonContent={setLessonContent}
