@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import CourseDescript from "../../../public/Components/CourseDescript";
 import CourseLessonPlan from "../../../public/Components/CourseLessonPlan";
 import LessonContent from "../../../public/Components/LessonContent";
+import Link from "next/link";
+
 import axios from "axios";
 
 export default function Course() {
@@ -71,6 +73,11 @@ export default function Course() {
     router.push("/courses");
   };
 
+  const updateCourse =(key,content) =>{
+    const courseRef = await axios.post(`/api/course/${courseId}`, {key,content});
+    setCourse(courseRef.data);
+  }
+
   const toggleActiveLesson = (id) => {
     if (!isEditable) {
       const lesson = lessons.filter((lesson) => lesson.id === id)[0];
@@ -83,28 +90,34 @@ export default function Course() {
   }
 
   return (
-    <main className={styles.gridContainer}>
-      <CourseDescript course={course} onRemove={deleteCourse} />
-      <CourseLessonPlan
-        courseId={course.id}
-        lessons={lessons}
-        addLesson={addLesson}
-        deleteLesson={deleteLesson}
-        toggleActiveLesson={toggleActiveLesson}
-        newLessonTitle={newLessonTitle}
-        setNewLessonTitle={setNewLessonTitle}
-      />
-      {activeLesson ? (
-        <LessonContent
-          isEditable={isEditable}
-          setIsEditable={setIsEditable}
-          updateLesson={updateLesson}
+    <>
+      <div className={styles.backToCourse}>
+        <Link href="/courses">Back to courses</Link>
+      </div>
+      <main className={styles.gridContainer}>
+        <CourseDescript course={course} onRemove={deleteCourse} updateCourse={updateCourse} />
+        <CourseLessonPlan
+          courseId={course.id}
           activeLesson={activeLesson}
-          setActiveLesson={setActiveLesson}
+          lessons={lessons}
+          addLesson={addLesson}
+          deleteLesson={deleteLesson}
+          toggleActiveLesson={toggleActiveLesson}
+          newLessonTitle={newLessonTitle}
+          setNewLessonTitle={setNewLessonTitle}
         />
-      ) : (
-        <></>
-      )}
-    </main>
+        {activeLesson ? (
+          <LessonContent
+            isEditable={isEditable}
+            setIsEditable={setIsEditable}
+            updateLesson={updateLesson}
+            activeLesson={activeLesson}
+            setActiveLesson={setActiveLesson}
+          />
+        ) : (
+          <></>
+        )}
+      </main>
+    </>
   );
 }
