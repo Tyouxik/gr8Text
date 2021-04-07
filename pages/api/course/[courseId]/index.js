@@ -33,6 +33,18 @@ const handler = nc()
     } catch (error) {
       console.log(error);
     }
+  })
+  .post(async (req, res) => {
+    try {
+      const { courseId } = req.query;
+      const { key, content } = req.body;
+      await db.doc(`/courses/${courseId}`).update({ [key]: content });
+      const courseRef = db.collection("courses").doc(courseId);
+      const updatedCourseRef = await courseRef.get();
+      const updatedCourse = collectIdsAndData(updatedCourseRef);
+      res.json(updatedCourse);
+    } catch (error) {
+      console.log(error);
+    }
   });
-
 export default handler;
