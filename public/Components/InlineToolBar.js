@@ -1,19 +1,23 @@
 import React from "react";
+import { FaBold, FaItalic, FaUnderline, FaStrikethrough } from "react-icons/fa";
+import ToolbarBtn from "../Atoms/ToolbarBtn";
 
 export default function InlineToolBar({ onInlineToggle }) {
   const InlineButtons = inlineStyles.map((inline) => {
     return (
-      <button onClick={() => onInlineToggle(inline.style)}>
-        {inline.label}
-      </button>
+      <ToolbarBtn
+        type={inline.style}
+        label={inline.label}
+        onClick={onInlineToggle}
+      />
     );
   });
   return <div>{InlineButtons}</div>;
 }
 
 const inlineStyles = [
-  { label: "bold", style: "BOLD" },
-  { label: "italic", style: "ITALIC" },
-  { label: "underline", style: "UNDERLINE" },
-  { label: "strikethrough", style: "STRIKETHROUGH" },
+  { label: <FaBold />, style: "BOLD" },
+  { label: <FaItalic />, style: "ITALIC" },
+  { label: <FaUnderline />, style: "UNDERLINE" },
+  { label: <FaStrikethrough />, style: "STRIKETHROUGH" },
 ];

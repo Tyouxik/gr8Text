@@ -1,0 +1,13 @@
+.toolbars {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.toolbarBtn {
+  padding: 5px;
+  font-size: large;
+}

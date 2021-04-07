@@ -1,4 +1,5 @@
 import React from "react";
+import ToolbarBtn from "../Atoms/ToolbarBtn";
 
 export default function BlockToolBar({ editorState, onBlockToggle }) {
   const selection = editorState.getSelection();
@@ -8,19 +9,18 @@ export default function BlockToolBar({ editorState, onBlockToggle }) {
     .getType();
   const BlockButtons = blockStyles.map((block) => {
     return (
-      <button
-        active={blockType === "header-one"}
-        onClick={() => onBlockToggle(block.style)}
-      >
-        {block.label}
-      </button>
+      <ToolbarBtn
+        type={block.style}
+        label={block.label}
+        onClick={onBlockToggle}
+      />
     );
   });
   return <div>{BlockButtons}</div>;
 }
 
 const blockStyles = [
-  { label: "h1", style: "header-one" },
-  { label: "h2", style: "header-two" },
-  { label: "h3", style: "header-three" },
+  { label: "H1", style: "header-one" },
+  { label: "H2", style: "header-two" },
+  { label: "H3", style: "header-three" },
 ];

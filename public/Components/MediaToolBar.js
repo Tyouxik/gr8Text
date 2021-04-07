@@ -1,18 +1,23 @@
 import React from "react";
-import axios from "axios";
+import { FaImage, FaVideo } from "react-icons/fa";
+import ToolbarBtn from "../Atoms/ToolbarBtn";
 
 function MediaToolBar({ promptForMedia }) {
   const mediaButtons = mediaTypes.map((media) => {
     return (
-      <button onClick={() => promptForMedia(media.type)}>{media.label}</button>
+      <ToolbarBtn
+        type={media.type}
+        label={media.label}
+        onClick={promptForMedia}
+      />
     );
   });
   return <div>{mediaButtons}</div>;
 }
 
 const mediaTypes = [
-  { label: "image", type: "image" },
-  { label: "video", type: "video" },
+  { label: <FaImage />, type: "image" },
+  { label: <FaVideo />, type: "video" },
 ];
 
 //Media components
@@ -56,8 +61,6 @@ const Video = ({ src, alt }) => {
     return <video controls src={src} style={styles.media} />;
   }
 };
-
-("https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=DsljtgONLOM&key=[YOUR_API_KEY]");
 
 const styles = {
   media: {
