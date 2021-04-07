@@ -3,6 +3,7 @@ import styles from "../../styles/course.module.css";
 
 export default function CourseLessonPlan({
   lessons,
+  activeLesson,
   addLesson,
   deleteLesson,
   toggleActiveLesson,
@@ -17,11 +18,14 @@ export default function CourseLessonPlan({
     );
 
   const lessonPlan = lessons.map((lesson) => {
+    let style;
+    if (activeLesson && lesson.id === activeLesson.id) {
+      style = `${styles.lesson} ${styles.activeLesson}`;
+    } else {
+      style = `${styles.lesson}`;
+    }
     return (
-      <div
-        className={styles.lesson}
-        onClick={() => toggleActiveLesson(lesson.id)}
-      >
+      <div className={style} onClick={() => toggleActiveLesson(lesson.id)}>
         <h3>{lesson.title}</h3>
         <button onClick={() => deleteLesson(lesson.id)}>-</button>
       </div>
@@ -35,7 +39,7 @@ export default function CourseLessonPlan({
   return (
     <>
       <div className={styles.coursePlan}>
-        <h2 className={styles.lesson}>Lesson plan</h2>
+        <h2 className={styles.lessonTitle}>Lesson plan</h2>
         {lessonPlan}
         <div className={styles.add_lesson}>
           <input
