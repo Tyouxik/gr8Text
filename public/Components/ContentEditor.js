@@ -34,14 +34,6 @@ export default function ContentEditor({
     }
   }, [isEditable]);
 
-  const onChange = (editorstate) => {
-    const raw = convertToRaw(editorstate.getCurrentContent());
-    console.log(raw);
-
-    setLessonContent(raw);
-    setEditorState(editorstate);
-  };
-
   useEffect(() => {
     if (activeLesson.content) {
       setEditorState(() =>
@@ -51,6 +43,14 @@ export default function ContentEditor({
       setEditorState(() => EditorState.createEmpty());
     }
   }, [activeLesson.id]);
+
+  const onChange = (editorstate) => {
+    const raw = convertToRaw(editorstate.getCurrentContent());
+    console.log(raw);
+
+    setLessonContent(raw);
+    setEditorState(editorstate);
+  };
 
   //Change the inline Styling of the selected text
   const onInlineToggle = (style) => {
