@@ -5,11 +5,41 @@
   gap: 0px 1px;
   grid-template-areas:
     "courseDescript courseDescript courseDescript courseDescript"
-    "lessonPlan editor editor comments";
+    "lessonPlan editor editor editor";
+}
+
+.backToCourse {
+  margin: 5px;
 }
 
 .courseDescript {
   grid-area: courseDescript;
+  padding-top: 1%;
+  padding-left: 1%;
+  /* border-top: 1px solid var(--lightGrey); */
+  border-bottom: 1px solid var(--lightGrey);
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "courseDescript_courseInfo courseDescript_description courseDescript_image";
+}
+
+.courseDescript_courseInfo {
+  grid-area: courseDescript_courseInfo;
+}
+
+.courseDescript_description {
+  grid-area: courseDescript_description;
+}
+
+.courseDescript_image {
+  grid-area: courseDescript_image;
+}
+
+.courseDescript_image img {
+  border-radius: 10px;
+  margin: 3px auto;
 }
 
 .coursePlan {
@@ -21,7 +51,7 @@
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-template-areas: "Title deleteButton";
-  background-color: #eee;
+  /* background-color: var(--lightPrimary); */
   color: #444;
   cursor: pointer;
   padding: 18px;
@@ -29,9 +59,19 @@
   text-align: left;
   transition: 0.4s;
 }
+.lessonTitle {
+  background: var(--lightPrimary);
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+}
+.activeLesson {
+  background-color: var(--lightPrimary);
+}
 
 .lesson:hover {
-  background-color: #ccc;
+  background-color: var(--lightPrimary);
 }
 .lesson h2 {
   margin: 0px;
