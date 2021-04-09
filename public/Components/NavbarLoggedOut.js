@@ -12,7 +12,7 @@ export default function NavbarLoggedOut() {
     <>
       <div className={styles.gridContainer}>
         <Logo className={styles.logo} />
-        <NavSearchBar className={styles.SearchBar} />
+        {/* <NavSearchBar className={styles.SearchBar} /> */}
         <NavLinks className={styles.Links} />
         <LoginBtn className={styles.LoginBtn} />
         <SignupBtn className={styles.SignupBtn} />

@@ -3,7 +3,7 @@
   grid-template-columns: 1fr 2fr 1fr 0.5fr 0.5fr;
   grid-template-rows: 1fr;
   gap: 0px 3px;
-  grid-template-areas: "Logo SearchBar Link LoginBtn SIngupBtn";
+  grid-template-areas: "Logo SearchBar Link  SignupBtn LoginBtn";
   line-height: 100px;
   border-bottom: 1px solid var(--lightGrey);
 }
@@ -19,6 +19,6 @@
 .LoginBtn {
   grid-area: LoginBtn;
 }
-.SingupBtn {
-  grid-area: SIngupBtn;
+.SignupBtn {
+  grid-area: SignupBtn;
 }
