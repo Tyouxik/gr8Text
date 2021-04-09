@@ -10,11 +10,16 @@ export default function Home() {
       </Head>
       <div className={styles.gridContainer}>
         <NavbarLoggedOut className={styles.Navbar} />
-        <div className={styles.Main}>
+        <div className={styles.bandOne}>
           <h1>Welcome to Gr8Courses</h1>
         </div>
-        <div className={styles.Footer}>
-          <h1>This is the footer</h1>
+        <div className={styles.bandTwo}>
+          <div>
+            <p>Hello world</p>
+          </div>
+          <div>
+            <p>Hello Mars</p>
+          </div>
         </div>
       </div>
     </>

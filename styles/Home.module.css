@@ -1,23 +1,25 @@
-.gridContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 0.25fr 2.25fr 0.5fr;
-  height: 100vh;
-  gap: 0px 0px;
-  grid-template-areas:
-    "Navbar"
-    "Main"
-    "Footer";
+.bandOne {
+  height: 40vh;
+  min-height: 400px;
+  margin: 0px;
+  background-color: var(--primary);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
 }
 
-.Navbar {
-  grid-area: Navbar;
-}
-
-.Main {
-  grid-area: Main;
-}
-
-.Footer {
-  grid-area: Footer;
+.bandTwo {
+  height: 40vh;
+  min-height: 400px;
+  margin: 0px;
+  background-color: var(--lightPrimary);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  align-content: stretch;
 }
