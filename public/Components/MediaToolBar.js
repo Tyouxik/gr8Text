@@ -1,5 +1,6 @@
 import React from "react";
-import { FaImage, FaVideo } from "react-icons/fa";
+import { FaImage, FaVideo, FaSlideshare } from "react-icons/fa";
+import { SiGooglesheets } from "react-icons/si";
 import ToolbarBtn from "../Atoms/ToolbarBtn";
 
 function MediaToolBar({ promptForMedia }) {
@@ -18,6 +19,8 @@ function MediaToolBar({ promptForMedia }) {
 const mediaTypes = [
   { label: <FaImage />, type: "image" },
   { label: <FaVideo />, type: "video" },
+  { label: <FaSlideshare />, type: "googleSlide" },
+  { label: <SiGooglesheets />, type: "googleSlide" },
 ];
 
 //Media components
@@ -26,12 +29,14 @@ function Media({ contentState, block }) {
   const entity = contentState.getEntity(block.getEntityAt(0));
   const { src, alt } = entity.getData();
   const type = entity.getType();
-  console.log("I am media type", type, src);
+
   let media;
   if (type === "image") {
     media = <Image src={src} alt={alt} />;
   } else if (type === "video") {
     media = <Video src={src} alt={alt} />;
+  } else if (type === "googleSlide") {
+    media = <GoogleSlide src={src} />;
   }
   return media;
 }
@@ -60,6 +65,21 @@ const Video = ({ src, alt }) => {
   } else {
     return <video controls src={src} style={styles.media} />;
   }
+};
+
+const GoogleSlide = ({ src, alt }) => {
+  const slideSrc = src.replace("pub?", "embed?");
+  return (
+    <iframe
+      src={slideSrc}
+      frameborder="0"
+      width="100%"
+      height="569"
+      allowfullscreen="true"
+      mozallowfullscreen="true"
+      webkitallowfullscreen="true"
+    ></iframe>
+  );
 };
 
 const styles = {
