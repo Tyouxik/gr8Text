@@ -73,10 +73,13 @@ export default function Course() {
     router.push("/courses");
   };
 
-  const updateCourse =(key,content) =>{
-    const courseRef = await axios.post(`/api/course/${courseId}`, {key,content});
+  const updateCourse = async (key, content) => {
+    const courseRef = await axios.post(`/api/course/${courseId}`, {
+      key,
+      content,
+    });
     setCourse(courseRef.data);
-  }
+  };
 
   const toggleActiveLesson = (id) => {
     if (!isEditable) {
@@ -95,7 +98,11 @@ export default function Course() {
         <Link href="/courses">Back to courses</Link>
       </div>
       <main className={styles.gridContainer}>
-        <CourseDescript course={course} onRemove={deleteCourse} updateCourse={updateCourse} />
+        <CourseDescript
+          course={course}
+          onRemove={deleteCourse}
+          updateCourse={updateCourse}
+        />
         <CourseLessonPlan
           courseId={course.id}
           activeLesson={activeLesson}
