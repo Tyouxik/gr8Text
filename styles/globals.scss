@@ -1,0 +1,26 @@
+$primary: rgb(150, 55, 214);
+$lightPrimary: rgb(185, 156, 205);
+$white: #ffffff;
+$black: black;
+$lightGrey: rgb(193, 193, 193);
+
+html,
+body,
+h1,
+h2,
+h3,
+p {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
