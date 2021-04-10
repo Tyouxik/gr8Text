@@ -1,8 +1,4 @@
-$primary: rgb(150, 55, 214);
-$lightPrimary: rgb(185, 156, 205);
-$white: #ffffff;
-$black: black;
-$lightGrey: rgb(193, 193, 193);
+@import "colors";
 
 .mainContainer {
   height: 100vh;
