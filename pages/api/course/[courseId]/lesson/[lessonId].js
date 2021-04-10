@@ -1,4 +1,4 @@
-import db from "../../../../../utils/db/index";
+import { db } from "../../../../../utils/db/index";
 import nc from "next-connect";
 import { collectIdsAndData } from "../../../../../utils/utilities";
 
