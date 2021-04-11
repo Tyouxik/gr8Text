@@ -1,0 +1,8 @@
+@import "colors";
+
+.errMessage {
+  background-color: $lightPrimary;
+  border-radius: 10px;
+  padding: 0.5rem;
+  text-align: center;
+}
