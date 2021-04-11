@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-import NavbarLoggedOut from "../public/Components/NavbarLoggedOut";
+import Navbar from "../public/Components/Navbar";
 
 export default function Home() {
   return (
@@ -9,7 +9,7 @@ export default function Home() {
         <title>Gr8Courses</title>
       </Head>
       <div className={styles.gridContainer}>
-        <NavbarLoggedOut className={styles.Navbar} />
+        <Navbar className={styles.Navbar} />
         <div className={styles.bandOne}>
           <h1>Welcome to Gr8Courses</h1>
         </div>
