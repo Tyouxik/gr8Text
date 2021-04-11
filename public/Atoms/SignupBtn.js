@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import styles from "../../styles/signupBtn.module.css";
+import styles from "../../styles/buttons.module.scss";
 
 export default function SignupBtn() {
   return (
