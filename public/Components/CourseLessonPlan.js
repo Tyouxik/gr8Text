@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/course.module.css";
+import styles from "../../styles/course.module.scss";
 
 export default function CourseLessonPlan({
   lessons,

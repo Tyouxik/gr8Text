@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import styles from "../../styles/courses.module.css";
+import styles from "../../styles/courses.module.scss";
 
 export default function AddCourse({
   courses,

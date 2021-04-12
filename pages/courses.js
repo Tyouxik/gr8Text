@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "../styles/courses.module.css";
+import styles from "../styles/courses.module.scss";
 import CourseCard from "../public/Components/CourseCard";
 import AddCourse from "../public/Components/AddCourse";
 import Navbar from "../public/Components/Navbar";

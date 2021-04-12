@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/courses.module.css";
+import styles from "../../styles/courses.module.scss";
 
 export default function CourseInfoTag({ img, text }) {
   return (

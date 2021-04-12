@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/EditorToolbar.module.css";
+import styles from "../../styles/EditorToolbar.module.scss";
 
 export default function ToolbarBtn({ type, label, onClick }) {
   return (

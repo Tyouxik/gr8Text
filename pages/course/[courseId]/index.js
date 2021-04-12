@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../../styles/course.module.css";
+import styles from "../../../styles/course.module.scss";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import CourseDescript from "../../../public/Components/CourseDescript";

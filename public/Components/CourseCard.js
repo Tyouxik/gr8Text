@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/courses.module.css";
+import styles from "../../styles/courses.module.scss";
 import Link from "next/link";
 import CourseInfoTag from "./CourseInfoTag";
 

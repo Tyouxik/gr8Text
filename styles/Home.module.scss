@@ -8,14 +8,14 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  color: var(--white);
+  color: $white;
 }
 
 .bandTwo {
   height: 40vh;
   min-height: 400px;
   margin: 0px;
-  background-color: var(--lightPrimary);
+  background-color: $lightPrimary;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

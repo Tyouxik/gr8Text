@@ -1,3 +1,5 @@
+@import "colors";
+
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -16,8 +18,7 @@
   grid-area: courseDescript;
   padding-top: 1%;
   padding-left: 1%;
-  /* border-top: 1px solid var(--lightGrey); */
-  border-bottom: 1px solid var(--lightGrey);
+  border-bottom: 1px solid $lightGrey;
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr;
   grid-template-rows: 1fr;
@@ -51,8 +52,8 @@
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-template-areas: "Title deleteButton";
-  /* background-color: var(--lightPrimary); */
-  color: #444;
+  /* background-color: $lightPrimary; */
+  color: $black;
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -60,18 +61,18 @@
   transition: 0.4s;
 }
 .lessonTitle {
-  background: var(--lightPrimary);
-  color: #444;
+  background: $lightPrimary;
+  color: $black;
   cursor: pointer;
   padding: 18px;
   width: 100%;
 }
 .activeLesson {
-  background-color: var(--lightPrimary);
+  background-color: $lightPrimary;
 }
 
 .lesson:hover {
-  background-color: var(--lightPrimary);
+  background-color: $lightPrimary;
 }
 .lesson h2 {
   margin: 0px;
@@ -89,7 +90,7 @@
   font-size: larger;
   color: red;
   border: 1px solid red;
-  background-color: white;
+  background-color: $white;
   padding: 5px 10px;
   margin: 10px;
   border-radius: 50%;
@@ -97,7 +98,7 @@
 }
 
 .lesson button:hover {
-  color: white;
+  color: $white;
   font-size: larger;
   border: 1px solid red;
   background-color: red;
@@ -123,28 +124,28 @@
   font-size: 20px;
 }
 .add_lesson input:focus {
-  border-bottom: 2px solid rgb(150, 55, 214);
+  border-bottom: 2px solid $primary;
 }
 
 .add_lesson button {
   grid-area: Button;
 
   font-size: larger;
-  color: rgb(150, 55, 214);
-  border: 1px solid rgb(150, 55, 214);
-  background-color: white;
+  color: $primary;
+  border: 1px solid $primary;
+  background-color: $white;
   padding: 5px 10px;
   margin: 10px;
 }
 .add_lesson button:hover {
   color: white;
-  border: 1.5px solid rgb(150, 55, 214);
-  background-color: rgb(150, 55, 214);
+  border: 1.5px solid $primary;
+  background-color: $primary;
 }
 
 .editor {
   grid-area: editor;
-  /* background-color: lightgrey; */
+  /* background-color: $lightGrey; */
   padding: 20px;
 }
 

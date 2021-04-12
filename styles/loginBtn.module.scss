@@ -1,0 +1,14 @@
+.loginBtn a {
+  border-radius: 10px;
+  padding: 10% 20%;
+  color: $primary;
+  background-color: $white;
+  border: 2px solid $primary;
+  width: 100%;
+}
+
+.loginBtn a:hover {
+  color: $white;
+  background-color: $primary;
+  border: 2px solid $white;
+}

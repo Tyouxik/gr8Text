@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/course.module.css";
+import styles from "../../styles/course.module.scss";
 import DeleteButton from "../Atoms/DeleteButton";
 import Link from "next/link";
 

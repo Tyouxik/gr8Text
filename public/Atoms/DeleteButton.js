@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/atoms.module.css";
+import styles from "../../styles/buttons.module.scss";
 
 export default function button({ label, onRemove }) {
   return (

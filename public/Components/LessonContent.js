@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/course.module.css";
+import styles from "../../styles/course.module.scss";
 import ToggleSwitch from "../Atoms/ToggleSwitch";
 import { useState, useEffect } from "react";
 import { convertToRaw, convertFromRaw, ContentState } from "draft-js";

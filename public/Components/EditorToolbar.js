@@ -2,7 +2,7 @@ import React from "react";
 import InlineToolBar from "./InlineToolBar";
 import BlockToolBar from "./BlockToolBar";
 import { MediaToolBar } from "./MediaToolBar";
-import styles from "../../styles/EditorToolbar.module.css";
+import styles from "../../styles/EditorToolbar.module.scss";
 
 export default function EditorToolbar({
   onInlineToggle,

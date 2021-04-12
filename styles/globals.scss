@@ -1,6 +1,26 @@
 @import "reset";
 @import "colors";
 
-* {
+$ratio: 1, 618;
+
+html {
   font-size: 16px;
+}
+
+@media screen and (max-width: 320px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+h1 {
+  font-size: calc(2rem * #{$ratio});
+}
+
+h2 {
+  font-size: calc(1.5rem * #{$ratio});
+}
+
+h3 {
+  font-size: calc(1rem * #{$ratio});
 }
