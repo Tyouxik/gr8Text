@@ -29,7 +29,7 @@ function useProvideAuth() {
     setLoading(true);
   };
 
-  const collectUserData = async (user) => {
+  const collectUserData = (user) => {
     const {
       displayName,
       email,
@@ -37,7 +37,6 @@ function useProvideAuth() {
       isAnonymous,
       phoneNumber,
       photoURL,
-      uid,
       token,
     } = user;
     return {
@@ -47,13 +46,14 @@ function useProvideAuth() {
       isAnonymous,
       phoneNumber,
       photoURL,
-      uid,
       token,
     };
   };
+
   const authStateChanged = async (authState) => {
     if (authState) {
       const formattedAuth = collectUserData(authState);
+      formattedAuth.token = await authState.getIdToken();
       // Stores auth into state.
       setAuth(formattedAuth);
       // Sets loading state to false.
@@ -66,34 +66,18 @@ function useProvideAuth() {
 
   const signupWithEmailAndPassword = async (email, password) => {
     try {
-      const userCredentials = await firebaseAuth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      let user = userCredentials.user;
-      user.token = await user.getIdToken();
-
-      let userData = await collectUserData(userCredentials.user);
-      setAuth(userData);
-      setLoading(false);
+      firebaseAuth.createUserWithEmailAndPassword(email, password);
     } catch (error) {
       let errorCode = error.code;
       let errorMessage = error.message;
       setErrMessage(errorMessage);
     }
   };
-  const signinWithEmailAndPassword = async (email, password) => {
+
+  const signinWithEmailAndPassword = (email, password) => {
     try {
       setLoading(true);
-      const userCredentials = await firebaseAuth.signInWithEmailAndPassword(
-        email,
-        password
-      );
-
-      let user = userCredentials.user;
-
-      setAuth(user);
-      setLoading(false);
+      firebaseAuth.signInWithEmailAndPassword(email, password);
     } catch (error) {
       let errorCode = error.code;
       let errorMessage = error.message;
@@ -103,15 +87,9 @@ function useProvideAuth() {
 
   const signInWithGoogle = async () => {
     setLoading(true);
-
     firebaseAuth.useDeviceLanguage();
     let provider = new firebase.auth.GoogleAuthProvider();
-
-    const userCredentials = await firebaseAuth.signInWithPopup(provider);
-
-    let user = await collectUserData(userCredentials.user);
-    setAuth(user);
-    setLoading(false);
+    firebaseAuth.signInWithPopup(provider);
   };
 
   const signOut = async () => {
