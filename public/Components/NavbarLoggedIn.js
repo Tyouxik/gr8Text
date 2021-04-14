@@ -7,7 +7,7 @@ import SignOut from "../Atoms/SignOut";
 export default function NavbarLoggedIn() {
   const links = [
     { label: "All Courses", path: "/courses" },
-    { label: "Dashboard", path: "/courses" },
+    { label: "Dashboard", path: "/dashboard" },
   ];
   return (
     <div className={styles.flexContainer}>
