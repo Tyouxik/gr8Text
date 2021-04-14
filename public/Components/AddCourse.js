@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "../../styles/courses.module.scss";
+import { useAuth } from "../../utils/auth-context";
 
 export default function AddCourse({
   courses,
@@ -11,15 +12,15 @@ export default function AddCourse({
   const [newCourseTitle, setNewCourseTitle] = useState("");
   const [newCourseCategory, setNewCourseCategory] = useState("Online Training");
   const [newCoursePrice, setNewCoursePrice] = useState("Free");
-  const [currentUser, setCurrentUser] = useState("Anonymous");
+  const { auth } = useAuth();
 
   const addCourse = async (e) => {
     e.preventDefault();
-    const newCourseRef = await axios.post("/api/courses", {
+    const newCourseRef = await axios.post("/api/course", {
       newCourseTitle,
       newCourseCategory,
       newCoursePrice,
-      currentUser,
+      token: auth.token,
     });
     const newCourse = newCourseRef.data;
     setCourses([newCourse, ...courses]);
