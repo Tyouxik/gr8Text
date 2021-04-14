@@ -6,12 +6,13 @@ import CourseDescript from "../../../public/Components/CourseDescript";
 import CourseLessonPlan from "../../../public/Components/CourseLessonPlan";
 import LessonContent from "../../../public/Components/LessonContent";
 import Link from "next/link";
-
 import axios from "axios";
+import { useAuth } from "../../../utils/auth-context";
 
 export default function Course() {
   const router = useRouter();
   const { courseId } = router.query;
+  const { auth } = useAuth();
 
   const [course, setCourse] = useState();
   const [lessons, setLessons] = useState();
@@ -20,16 +21,17 @@ export default function Course() {
   const [isEditable, setIsEditable] = useState(false);
 
   useEffect(async () => {
-    console.log("I am courseId in course page", courseId);
     const snapshot = await axios.get(`/api/course/${courseId}`);
     const course = snapshot.data.course;
     const lessons = snapshot.data.lessons;
+
+    console.log(snapshot);
     setCourse(course);
     setLessons(lessons);
-  }, [router]);
+  }, [router, auth]);
 
   const addLesson = async () => {
-    const newLessonRef = await axios.post(`/api/course/${courseId}/addlesson`, {
+    const newLessonRef = await axios.post(`/api/course/${courseId}/lessons`, {
       newLessonTitle,
     });
     const newLesson = newLessonRef.data;
@@ -95,7 +97,7 @@ export default function Course() {
   return (
     <>
       <div className={styles.backToCourse}>
-        <Link href="/courses">Back to courses</Link>
+        <Link href="/dashboard">Back to courses</Link>
       </div>
       <main className={styles.gridContainer}>
         <CourseDescript
