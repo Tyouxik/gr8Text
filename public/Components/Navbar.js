@@ -5,7 +5,6 @@ import { useAuth } from "../../utils/auth-context";
 
 export default function Navbar() {
   const { auth } = useAuth();
-  console.log(auth);
 
   return (
     <div>

@@ -6,6 +6,7 @@ const handler = nc()
   .get(async (req, res) => {
     try {
       const { courseId } = req.query;
+
       const courseRef = db.collection("courses").doc(courseId);
       const lessonsRef = courseRef.collection("lessons");
 
@@ -18,7 +19,6 @@ const handler = nc()
       if (!course) {
         res.json("No course");
       } else {
-        const { title, price, category, access, id } = course;
         res.json({ course, lessons });
       }
     } catch (error) {
