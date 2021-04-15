@@ -72,7 +72,7 @@ export default function Course() {
   const deleteCourse = async () => {
     console.log(courseId);
     await axios.delete(`/api/course/${courseId}`);
-    router.push("/courses");
+    router.push("/dashboard");
   };
 
   const updateCourse = async (key, content) => {
