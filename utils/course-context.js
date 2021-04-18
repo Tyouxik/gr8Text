@@ -1,16 +1,20 @@
-import React from "react";
-import styles from "../../../styles/course.module.scss";
-import { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
-import CourseDescript from "../../../public/Components/CourseDescript";
-import CourseLessonPlan from "../../../public/Components/CourseLessonPlan";
-import LessonContent from "../../../public/Components/LessonContent";
-import Link from "next/link";
+import { useAuth } from "./auth-context";
 import axios from "axios";
-import { useAuth } from "../../../utils/auth-context";
-import { useCourse, CourseProvider } from "../../../utils/course-context";
 
-export default function Course() {
+const courseContext = React.createContext();
+
+export function CourseProvider({ children }) {
+  const course = useProvideCourse();
+  return (
+    <courseContext.Provider value={course}>{children}</courseContext.Provider>
+  );
+}
+
+export const useCourse = () => useContext(courseContext);
+
+function useProvideCourse() {
   const router = useRouter();
   const { courseId } = router.query;
   const { auth } = useAuth();
@@ -25,7 +29,6 @@ export default function Course() {
     const course = snapshot.data.course;
     const lessons = snapshot.data.lessons;
 
-    console.log(snapshot);
     setCourse(course);
     setLessons(lessons);
   }, [router, auth]);
@@ -70,15 +73,14 @@ export default function Course() {
   };
 
   const deleteCourse = async () => {
-    console.log(courseId);
     await axios.delete(`/api/course/${courseId}`);
     router.push("/dashboard");
   };
 
-  const updateCourse = async (key, content) => {
+  const updateCourse = async (content) => {
     const courseRef = await axios.post(`/api/course/${courseId}`, {
-      key,
       content,
+      authToken: auth.token,
     });
     setCourse(courseRef.data);
   };
@@ -90,41 +92,22 @@ export default function Course() {
     }
   };
 
-  if (!lessons || !course) {
-    return <></>;
-  }
-
-  return (
-    <>
-      <CourseProvider>
-        <div className={styles.backToCourse}>
-          <Link href="/dashboard">Back to courses</Link>
-        </div>
-        <main className={styles.gridContainer}>
-          <CourseDescript />
-          <CourseLessonPlan
-            courseId={course.id}
-            activeLesson={activeLesson}
-            lessons={lessons}
-            addLesson={addLesson}
-            deleteLesson={deleteLesson}
-            toggleActiveLesson={toggleActiveLesson}
-            newLessonTitle={newLessonTitle}
-            setNewLessonTitle={setNewLessonTitle}
-          />
-          {activeLesson ? (
-            <LessonContent
-              isEditable={isEditable}
-              setIsEditable={setIsEditable}
-              updateLesson={updateLesson}
-              activeLesson={activeLesson}
-              setActiveLesson={setActiveLesson}
-            />
-          ) : (
-            <></>
-          )}
-        </main>
-      </CourseProvider>
-    </>
-  );
+  return {
+    course,
+    setCourse,
+    lessons,
+    setLessons,
+    activeLesson,
+    setActiveLesson,
+    newLessonTitle,
+    setNewLessonTitle,
+    isEditable,
+    setIsEditable,
+    addLesson,
+    deleteLesson,
+    updateLesson,
+    deleteCourse,
+    updateCourse,
+    toggleActiveLesson,
+  };
 }

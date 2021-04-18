@@ -1,38 +1,123 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../styles/course.module.scss";
 import DeleteButton from "../Atoms/DeleteButton";
 import Link from "next/link";
+import { useCourse } from "../../utils/course-context";
 
-export default function CourseDescript({ course, onRemove }) {
+export default function CourseDescript() {
+  const [edit, setEdit] = useState(false);
+  const { course } = useCourse();
+
   if (!course) return <></>;
-  const { title, access, category, students, description } = course;
-
   return (
     <>
-      <div className={styles.courseDescript}>
-        <div className={styles.courseDescript_courseInfo}>
-          <h1>{title}</h1>
-          <p>{access}</p>
-          <p>{category}</p>
-          <p>
-            Current students:{" "}
-            {students === undefined ? "no students yet" : students.join(", ")}
-          </p>
-          <DeleteButton onRemove={onRemove} label="Delete course" />
-        </div>
-        <div className={styles.courseDescript_description}>
-          <h2>Description</h2>
-          {description ? description : "add a description"}
-        </div>
-        <div className={styles.courseDescript_image}>
-          <img
-            className={styles.courseImg}
-            width="90%"
-            src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
-            alt=""
-          />
-        </div>
-      </div>
+      {edit && <CourseDescriptEdit setEdit={setEdit} />}
+      {!edit && <CourseDescriptDisplay setEdit={setEdit} />}
     </>
+  );
+}
+
+function CourseDescriptDisplay({ setEdit }) {
+  const { course, deleteCourse } = useCourse();
+  const { title, access, description } = course;
+
+  return (
+    <div className={styles.courseDescript}>
+      <div className={styles.courseDescript_courseInfo}>
+        <h1>{title}</h1>
+        <p>{access}</p>
+        <button onClick={() => setEdit(true)}>Edit</button>
+        <DeleteButton onRemove={deleteCourse} label="Delete course" />
+      </div>
+      <div className={styles.courseDescript_description}>
+        <h2>Description</h2>
+        {description ? description : "add a description"}
+      </div>
+    </div>
+  );
+}
+
+function CourseDescriptEdit({ setEdit }) {
+  const { course, updateCourse } = useCourse();
+  const { title, access, description } = course;
+  const [newTitle, setNewTitle] = useState(title);
+  const [newAccess, setNewAccess] = useState(access);
+  const [newDescription, setnewDescription] = useState(description);
+
+  const onHandleChange = (e) => {
+    const { name, value } = e.target;
+    console.log();
+    if (name === "title") {
+      setNewTitle(value);
+    } else if (name === "access") {
+      setNewAccess(value);
+    } else {
+      setnewDescription(value);
+    }
+  };
+
+  const onSave = () => {
+    let dataToUpdate = {};
+    if (title != newTitle) {
+      dataToUpdate.title = newTitle;
+    }
+    if (access != newAccess) {
+      dataToUpdate.access = newAccess;
+    }
+    if (description != newDescription) {
+      dataToUpdate.description = newDescription;
+    }
+    updateCourse(dataToUpdate);
+    setEdit(false);
+  };
+
+  const onCancel = () => {
+    setEdit(false);
+    setNewAccess(access);
+    setNewTitle(title);
+    setnewDescription(description);
+  };
+
+  return (
+    <div className={styles.courseDescript}>
+      <div className={styles.courseDescript_courseInfo}>
+        <label htmlFor="title">
+          Title
+          <input
+            onChange={onHandleChange}
+            type="text"
+            name="title"
+            value={newTitle}
+          />
+        </label>
+        <label htmlFor="access">
+          Access
+          <select
+            name="access"
+            id="access"
+            value={newAccess}
+            onChange={onHandleChange}
+          >
+            <option value="public">public</option>
+            <option value="private">private</option>
+          </select>
+        </label>
+        <button onClick={onSave}>Save</button>
+        <button onClick={onCancel}>Cancel</button>
+      </div>
+      <div className={styles.courseDescript_description}>
+        <label htmlFor="description">
+          Description
+          <textarea
+            name="description"
+            id="description"
+            cols="30"
+            rows="5"
+            value={newDescription}
+            onChange={onHandleChange}
+          ></textarea>
+        </label>
+      </div>
+    </div>
   );
 }

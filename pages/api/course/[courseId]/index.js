@@ -1,4 +1,4 @@
-import { db } from "../../../../utils/db/index";
+import { db, auth } from "../../../../utils/db/index";
 import nc from "next-connect";
 import { collectIdsAndData } from "../../../../utils/utilities";
 
@@ -37,12 +37,21 @@ const handler = nc()
   .post(async (req, res) => {
     try {
       const { courseId } = req.query;
-      const { key, content } = req.body;
-      await db.doc(`/courses/${courseId}`).update({ [key]: content });
-      const courseRef = db.collection("courses").doc(courseId);
-      const updatedCourseRef = await courseRef.get();
-      const updatedCourse = collectIdsAndData(updatedCourseRef);
-      res.json(updatedCourse);
+      const { authToken, content } = req.body;
+
+      const { uid } = await auth.verifyIdToken(authToken);
+      console.log({ uid, content });
+
+      const courseRef = await db.collection("courses").doc(courseId).get();
+      console.log(courseRef.data().creator);
+      if (courseRef.data().creator === uid) {
+        await db.doc(`/courses/${courseId}`).update(content);
+        let updatedCourse = await db.collection("courses").doc(courseId).get();
+        updatedCourse = collectIdsAndData(updatedCourse);
+        res.json(updatedCourse);
+      } else {
+        res.json({});
+      }
     } catch (error) {
       console.log(error);
     }
