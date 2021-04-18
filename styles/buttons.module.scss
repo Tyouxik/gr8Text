@@ -44,13 +44,28 @@
   text-align: center;
   color: red;
   background-color: white;
-  border-radius: 15px;
-  width: 150px;
-  padding: 5px 20px;
+  border-radius: 1rem;
+  padding: 0.3rem 0.8rem;
   border: 1px solid red;
+
+  &:hover {
+    color: white;
+    background-color: red;
+    border: 1px solid white;
+  }
 }
-.delete_btn:hover {
-  color: white;
-  background-color: red;
-  border: 1px solid white;
+
+.edit_btn {
+  text-align: center;
+  color: $primary;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid $primary;
+
+  &:hover {
+    color: white;
+    background-color: $primary;
+    border: 1px solid white;
+  }
 }

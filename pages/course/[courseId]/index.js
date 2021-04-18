@@ -97,9 +97,6 @@ export default function Course() {
   return (
     <>
       <CourseProvider>
-        <div className={styles.backToCourse}>
-          <Link href="/dashboard">Back to courses</Link>
-        </div>
         <main className={styles.gridContainer}>
           <CourseDescript />
           <CourseLessonPlan
