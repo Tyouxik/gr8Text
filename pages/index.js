@@ -1,6 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.scss";
-import Navbar from "../public/Components/Navbar";
+import HeroTriangleDown from "../public/Atoms/HeroTriangleDown";
+import HeroTriangleLeft from "../public/Atoms/HeroTriangleLeft";
+import HeroRectangle from "../public/Atoms/HeroRectangle";
 
 export default function Home() {
   return (
@@ -8,19 +10,22 @@ export default function Home() {
       <Head>
         <title>Gr8Courses</title>
       </Head>
-      <div className={styles.gridContainer}>
-        <Navbar className={styles.Navbar} />
-        <div className={styles.bandOne}>
-          <h1>Welcome to Gr8Courses</h1>
-        </div>
-        <div className={styles.bandTwo}>
-          <div>
-            <p>Hello world</p>
-          </div>
-          <div>
-            <p>Hello Mars</p>
-          </div>
-        </div>
+
+      <div>
+        <HeroTriangleDown>
+          <h1>Welcome to CourseBuilder</h1>
+        </HeroTriangleDown>
+        <HeroRectangle>
+          <h2>Discover our courses</h2>
+          <h2>Here they are</h2>
+        </HeroRectangle>
+        <HeroTriangleDown>
+          <h2>Discover our courses</h2>
+        </HeroTriangleDown>
+        <HeroRectangle>
+          <h2>Discover our courses</h2>
+          <h2>Here they are</h2>
+        </HeroRectangle>
       </div>
     </>
   );
@@ -30,7 +35,7 @@ export default function Home() {
       <Head>
         
       </Head>
-      <Navbar></Navbar>
+      
       <main className={styles.main}>
         
       </main>
