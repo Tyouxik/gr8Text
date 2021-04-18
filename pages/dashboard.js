@@ -54,7 +54,7 @@ export default function dashboard() {
           setShowAddCourse={setShowAddCourse}
         />
       )}
-      <Navbar />
+
       <div className={styles.course_cards}>
         <div
           onClick={toggleAddCourse}

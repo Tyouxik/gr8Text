@@ -14,7 +14,6 @@ export default function courses() {
 
   return (
     <div>
-      <Navbar />
       {courses.map((course) => (
         <CourseCard course={course} />
       ))}
