@@ -9,12 +9,16 @@ When a course is published, the free courses can be viewed by unlogged user, and
 # Stack
 
 NextJS for the structure.
+
 DrafJS for editing the content of a lesson
+
 Firebase for authentication and database
+
 Sass for styling
 
-Postman for API testing
-Jest and Enzyme for Integration and Unit Testing
+Postman for API testing (coming soon)
+
+Jest and Enzyme for Integration and Unit Testing (coming soon)
 
 # About me
 
