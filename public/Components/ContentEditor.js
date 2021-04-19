@@ -13,8 +13,8 @@ import MediaUrlInput from "./MediaUrlInput";
 import { blockRenderer } from "./EditorUtils";
 import { useCourse } from "../../utils/course-context";
 
-export default function ContentEditor() {
-  const { isEditable, activeLesson, setLessonContent } = useCourse();
+export default function ContentEditor({ lessonContent, setLessonContent }) {
+  const { isEditable, activeLesson } = useCourse();
 
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()

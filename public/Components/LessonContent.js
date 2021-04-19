@@ -2,7 +2,6 @@ import React from "react";
 import styles from "../../styles/course.module.scss";
 import ToggleSwitch from "../Atoms/ToggleSwitch";
 import { useState, useEffect } from "react";
-import { convertToRaw, convertFromRaw, ContentState } from "draft-js";
 import ContentEditor from "./ContentEditor";
 import { useCourse } from "../../utils/course-context";
 
@@ -23,7 +22,7 @@ export default function lessonContent() {
   useEffect(() => {
     const timerId = setTimeout(
       () => setDebouncedLessonContent(lessonContent),
-      3000
+      1000
     );
     return () => clearTimeout(timerId);
   }, [lessonContent]);
@@ -50,8 +49,6 @@ export default function lessonContent() {
             toggleStateFunction={setIsEditable}
           />
           <ContentEditor
-            isEditable={isEditable}
-            activeLesson={activeLesson}
             lessonContent={lessonContent}
             setLessonContent={setLessonContent}
           />
