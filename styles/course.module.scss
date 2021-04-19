@@ -45,35 +45,7 @@
   }
 }
 
-//Course Description
-/* .courseDescript {
-  grid-area: courseDescript;
-  padding-top: 1%;
-  padding-left: 1%;
-  border-bottom: 1px solid $lightGrey;
-  display: grid;
-  grid-template-columns: 1fr 1.5fr 1fr;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-template-areas: "courseDescript_courseInfo courseDescript_description courseDescript_image";
-}
-
-.courseDescript_courseInfo {
-  grid-area: courseDescript_courseInfo;
-}
-
-.courseDescript_description {
-  grid-area: courseDescript_description;
-}
-
-.courseDescript_image {
-  grid-area: courseDescript_image;
-}
-
-.courseDescript_image img {
-  border-radius: 10px;
-  margin: 3px auto;
-} */
+//Course Lesson Plan
 
 .coursePlan {
   grid-area: lessonPlan;
@@ -184,7 +156,7 @@
 .comments {
   grid-area: comments;
 }
-
+/* 
 @media screen and (min-width: 880px) {
   .gridContainer {
     display: grid;
@@ -195,4 +167,4 @@
       "courseDescript courseDescript courseDescript courseDescript"
       "lessonPlan editor editor editor";
   }
-}
+} */
