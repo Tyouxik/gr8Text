@@ -48,103 +48,57 @@
 //Course Lesson Plan
 
 .coursePlan {
-  grid-area: lessonPlan;
-}
-.lesson {
-  display: grid;
-  grid-template-columns: 1.6fr 0.4fr;
-  grid-template-rows: 1fr;
-  gap: 0px 0px;
-  grid-template-areas: "Title deleteButton";
-  /* background-color: $lightPrimary; */
-  color: $black;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  text-align: left;
-  transition: 0.4s;
 }
 .lessonTitle {
-  background: $lightPrimary;
-  color: $black;
-  cursor: pointer;
-  padding: 18px;
   width: 100%;
+  border: none;
+  border-top: 0.25rem solid $lightPrimary;
+  border-bottom: 0.25rem solid $lightPrimary;
+  padding: 0.25rem 0;
+
+  h2 {
+    font-size: 2rem;
+    margin: 0;
+  }
 }
+
+.lessonList {
+  font-size: 2rem;
+  li {
+    padding: 1rem;
+  }
+}
+
+.lesson {
+  display: flex;
+
+  svg {
+    margin-left: 1rem;
+    color: red;
+  }
+}
+
 .activeLesson {
   background-color: $lightPrimary;
 }
 
-.lesson:hover {
-  background-color: $lightPrimary;
-}
-.lesson h2 {
-  margin: 0px;
-  padding: 0px;
-}
-
-.lesson h3 {
-  grid-area: Title;
-  margin: 0px;
-  padding: 0px;
-}
-
-.lesson button {
-  grid-area: deleteButton;
-  font-size: larger;
-  color: red;
-  border: 1px solid red;
-  background-color: $white;
-  padding: 5px 10px;
-  margin: 10px;
-  border-radius: 50%;
-  outline: none;
-}
-
-.lesson button:hover {
-  color: $white;
-  font-size: larger;
-  border: 1px solid red;
-  background-color: red;
-}
-
 .add_lesson {
-  display: grid;
-  grid-template-columns: 1.6fr 0.4fr;
-  grid-template-rows: 1fr;
-  gap: 5px 5px;
-  grid-template-areas: "Input Button";
-  padding: 5px;
-}
+  input {
+    font-size: 2rem;
+    border: none;
 
-.add_lesson input {
-  grid-area: Input;
-  padding-left: 18px;
-  /* max-width: 70%; */
-  padding-bottom: 12px;
-  margin: 8px 0;
-  border: none;
-  outline: none;
-  font-size: 20px;
-}
-.add_lesson input:focus {
-  border-bottom: 2px solid $primary;
-}
+    &:hover,
+    &:focus {
+      border-bottom: 0.25rem solid $primary;
+    }
+  }
 
-.add_lesson button {
-  grid-area: Button;
-
-  font-size: larger;
-  color: $primary;
-  border: 1px solid $primary;
-  background-color: $white;
-  padding: 5px 10px;
-  margin: 10px;
-}
-.add_lesson button:hover {
-  color: white;
-  border: 1.5px solid $primary;
-  background-color: $primary;
+  button {
+    font-size: 2rem;
+    border: none;
+    background-color: transparent;
+    color: $primary;
+  }
 }
 
 .editor {
