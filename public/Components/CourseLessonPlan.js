@@ -1,15 +1,27 @@
 import React from "react";
 import styles from "../../styles/course.module.scss";
+import { useCourse } from "../../utils/course-context";
 
-export default function CourseLessonPlan({
-  lessons,
-  activeLesson,
-  addLesson,
-  deleteLesson,
-  toggleActiveLesson,
-  newLessonTitle,
-  setNewLessonTitle,
-}) {
+export default function CourseLessonPlan() {
+  const {
+    lessons,
+    activeLesson,
+    addLesson,
+    deleteLesson,
+    toggleActiveLesson,
+    newLessonTitle,
+    setNewLessonTitle,
+  } = useCourse();
+
+  console.log({
+    lessons,
+    activeLesson,
+    addLesson,
+    deleteLesson,
+    toggleActiveLesson,
+    newLessonTitle,
+    setNewLessonTitle,
+  });
   if (!lessons)
     return (
       <>

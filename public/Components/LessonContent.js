@@ -4,14 +4,15 @@ import ToggleSwitch from "../Atoms/ToggleSwitch";
 import { useState, useEffect } from "react";
 import { convertToRaw, convertFromRaw, ContentState } from "draft-js";
 import ContentEditor from "./ContentEditor";
+import { useCourse } from "../../utils/course-context";
 
-export default function lessonContent({
-  activeLesson,
-  updateLesson,
+export default function lessonContent() {
+  const { activeLesson, updateLesson, isEditable, setIsEditable } = useCourse();
 
-  isEditable,
-  setIsEditable,
-}) {
+  if (!activeLesson) {
+    return <></>;
+  }
+
   const [lessonContent, setLessonContent] = useState(activeLesson.content);
   const [debouncedLessonContent, setDebouncedLessonContent] = useState();
 

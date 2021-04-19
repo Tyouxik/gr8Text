@@ -11,12 +11,11 @@ import {
 import EditorToolbar from "./EditorToolbar";
 import MediaUrlInput from "./MediaUrlInput";
 import { blockRenderer } from "./EditorUtils";
+import { useCourse } from "../../utils/course-context";
 
-export default function ContentEditor({
-  isEditable,
-  activeLesson,
-  setLessonContent,
-}) {
+export default function ContentEditor() {
+  const { isEditable, activeLesson, setLessonContent } = useCourse();
+
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
