@@ -130,7 +130,7 @@ const styles = {
     border: "1px solid #ccc",
     cursor: "text",
     minHeight: 80,
-    padding: 10,
+    padding: 0,
   },
   button: {
     marginTop: 10,

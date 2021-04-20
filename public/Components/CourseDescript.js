@@ -118,7 +118,7 @@ function CourseDescriptEdit({ setEdit }) {
           <textarea
             name="description"
             id="description"
-            cols="60"
+            cols="35"
             rows="5"
             value={newDescription}
             onChange={onHandleChange}

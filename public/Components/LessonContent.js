@@ -43,16 +43,14 @@ export default function lessonContent() {
   } else {
     return (
       <div className={styles.editor}>
-        <div>
-          <ToggleSwitch
-            toggleState={isEditable}
-            toggleStateFunction={setIsEditable}
-          />
-          <ContentEditor
-            lessonContent={lessonContent}
-            setLessonContent={setLessonContent}
-          />
-        </div>
+        <ToggleSwitch
+          toggleState={isEditable}
+          toggleStateFunction={setIsEditable}
+        />
+        <ContentEditor
+          lessonContent={lessonContent}
+          setLessonContent={setLessonContent}
+        />
       </div>
     );
   }

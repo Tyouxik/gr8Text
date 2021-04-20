@@ -1,3 +1,5 @@
+@import "colors";
+
 .toolbars {
   display: flex;
   flex-direction: row;
@@ -5,9 +7,16 @@
   justify-content: flex-start;
   align-items: stretch;
   align-content: stretch;
-}
+  margin-bottom: 1rem;
 
-.toolbarBtn {
-  padding: 5px;
-  font-size: large;
+  button {
+    padding: 0.2rem 0.5rem;
+    font-size: 1.5rem;
+    color: $black;
+    border: none;
+    border: 0.05rem solid $black;
+    background-color: $white;
+    line-height: 2.45rem;
+    margin-right: 0.1rem;
+  }
 }

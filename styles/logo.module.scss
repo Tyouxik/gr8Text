@@ -23,10 +23,3 @@
   font-weight: bolder;
   color: $white;
 }
-
-@media screen and (max-width: 375px) {
-  .firstWord,
-  .secondWord {
-    font-size: 0.5rem;
-  }
-}
