@@ -36,6 +36,7 @@ function useProvideCourse() {
   const addLesson = async () => {
     const newLessonRef = await axios.post(`/api/course/${courseId}/lessons`, {
       newLessonTitle,
+      token: auth.token,
     });
     const newLesson = newLessonRef.data;
     setLessons([...lessons, newLesson]);
@@ -43,7 +44,10 @@ function useProvideCourse() {
   };
 
   const deleteLesson = async (id) => {
-    await axios.delete(`/api/course/${courseId}/lesson/${id}`);
+    console.log(auth.token);
+    await axios.post(`/api/course/${courseId}/lesson/${id}/deleteLesson`, {
+      token: auth.token,
+    });
     const newLessonList = lessons.filter((lesson) => lesson.id !== id);
     setLessons(newLessonList);
   };
@@ -73,7 +77,9 @@ function useProvideCourse() {
   };
 
   const deleteCourse = async () => {
-    await axios.delete(`/api/course/${courseId}`);
+    await axios.post(`/api/course/${courseId}/deleteCourse`, {
+      token: auth.token,
+    });
     router.push("/dashboard");
   };
 
