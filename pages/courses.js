@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Navbar from "../public/Components/Navbar";
 import CourseCard from "../public/Components/CourseCard";
+import _ from "../styles/courses.module.scss";
 
 export default function courses() {
   const [courses, setCourses] = useState([{}]);
-  const [showAddCourse, setShowAddCourse] = useState(false);
 
   useEffect(async () => {
     const courses = await axios.get(`/api/courses`);
@@ -13,9 +12,13 @@ export default function courses() {
   }, []);
 
   return (
-    <div>
+    <div className={_.coursesWrapper}>
       {courses.map((course) => (
-        <CourseCard course={course} />
+        <CourseCard
+          className={_.course}
+          course={course}
+          link={`/course/${course.id}`}
+        />
       ))}
     </div>
   );

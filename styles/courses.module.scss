@@ -1,102 +1,94 @@
 @import "colors";
 
 .course_cards {
-  width: 100%;
-  padding: 0px 5px;
+  margin-top: 4%;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: baseline;
+  flex-flow: row wrap;
+  /* justify-content: flex-start;
+  align-items: baseline; */
 }
 
+//CourseCard
 .card {
   /*  height: 350px; */
-  max-width: 300px;
-  min-width: 250px;
-  border: 2px solid $black;
-  margin: 15px 10px;
-  border-radius: 20px;
-  padding: 15px 15px;
-}
-
-.img_holder {
-  position: relative;
-  margin-bottom: 5px;
-}
-
-.img_holder_img {
-  max-height: 70%;
-  width: 100%;
-  border-radius: 20px;
-  object-fit: contain;
-}
-
-.img_holder span {
-  text-align: center;
-  font-size: large;
-  color: white;
-  background-color: $primary;
-  width: 110px;
-  padding: 5px 20px;
+  margin-left: 4%;
+  margin-bottom: 2%;
+  padding: 2%;
+  flex-basis: 40%;
+  flex-shrink: 2;
   border-radius: 15px;
-  position: absolute;
-  left: 30%;
-  bottom: -10px;
+  border: 1px dotted $black;
+  transition-duration: 2s;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2%;
+  }
+
+  &:hover {
+    border: 1px solid $primary;
+    flex-grow: 1;
+    transition-duration: 4s;
+  }
 }
-.add_course_blurred_background {
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 100px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
-}
+
+//AddCourse
 
 .add_course {
   background-color: $white;
-  border: 2px solid $black;
+  border: 1px solid $black;
   border-radius: 15px;
+  overflow: hidden;
+  margin: 0 4%;
+  width: 92%;
+  transition-duration: 3s;
+
+  h3 {
+    font-size: 2rem;
+    color: $white;
+    padding: 0.25rem 0;
+    text-align: center;
+    background-color: $primary;
+    border-radius: 15px;
+  }
+}
+.add_course_form {
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  height: 300px;
-  width: 350px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -150px; /* Negative half of height. */
-  margin-left: -175px; /* Negative half of width. */
-  z-index: 1;
+  flex-flow: column nowrap;
+  padding-bottom: 5%;
+  transition-duration: 4s;
+
+  input {
+    flex-basis: 50%;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0.5rem;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+
+    &:focus {
+      border-bottom: 2px solid $primary;
+    }
+  }
+
+  select {
+    flex-basis: 50%;
+    margin: 0.5rem 0.5rem;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: $lightGrey;
+  }
+
+  button {
+    margin-top: 1rem;
+    align-self: center;
+  }
 }
 
-.add_course input {
-  width: 90%;
-  padding-bottom: 12px;
-  margin: 8px 0;
-  border: none;
-  outline: none;
-  font-size: 20px;
-}
-.add_course input:focus {
-  border-bottom: 2px solid $primary;
-}
-.add_course select {
-  width: 90%;
-  padding: 16px 20px;
-  border: none;
-  border-radius: 4px;
-  background-color: $lightGrey;
-}
 .add_course_btn {
   text-align: center;
-  font-size: large;
+  font-size: 1rem;
   color: white;
   background-color: $primary;
   border-radius: 15px;
@@ -124,4 +116,16 @@
 .card_access_text {
   margin: 0px;
   grid-area: Text;
+}
+
+//Display courses
+
+.coursesWrapper {
+  display: flex;
+  flex-flow: row wrap;
+
+  .course {
+    margin-left: 2%;
+    flex-basis: 35%;
+  }
 }
