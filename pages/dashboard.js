@@ -7,12 +7,11 @@ import Navbar from "../public/Components/Navbar";
 import { useAuth } from "../utils/auth-context";
 import { fetcher } from "../utils/utilities";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function dashboard() {
   const router = useRouter();
-
   const [courses, setCourses] = useState([{}]);
-  const [showAddCourse, setShowAddCourse] = useState(false);
   const { auth, loading } = useAuth();
 
   useEffect(() => {
@@ -34,7 +33,9 @@ export default function dashboard() {
   const coursesDisplay =
     courses.length !== 0 ? (
       courses.map((course) => {
-        return <CourseCard course={course} />;
+        return (
+          <CourseCard course={course} link={`/course/${course.id}/editor`} />
+        );
       })
     ) : (
       <></>
@@ -46,24 +47,12 @@ export default function dashboard() {
 
   return (
     <>
-      {showAddCourse && (
-        <AddCourse
-          toggleAddCourse={toggleAddCourse}
-          courses={courses}
-          setCourses={setCourses}
-          setShowAddCourse={setShowAddCourse}
-        />
-      )}
-
-      <div className={styles.course_cards}>
-        <div
-          onClick={toggleAddCourse}
-          className={`${styles.card} ${styles.add_course_btn}`}
-        >
-          <p>New Course</p>
-        </div>
-        {coursesDisplay}
-      </div>
+      <AddCourse
+        toggleAddCourse={toggleAddCourse}
+        courses={courses}
+        setCourses={setCourses}
+      />
+      <div className={styles.course_cards}>{coursesDisplay}</div>
     </>
   );
 }
