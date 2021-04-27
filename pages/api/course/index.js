@@ -28,7 +28,6 @@ const handler = nc()
       const course = {
         title: newCourseTitle,
         category: newCourseCategory,
-        price: newCoursePrice,
         access: "private",
         creator: uid,
       };

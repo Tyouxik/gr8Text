@@ -17,19 +17,10 @@ const handler = nc()
       const lessons = lessonsListRef.docs.map(collectIdsAndData);
 
       if (!course) {
-        res.json("No course");
+        res.json({ course: {}, lessons: [] });
       } else {
         res.json({ course, lessons });
       }
-    } catch (error) {
-      console.log(error);
-    }
-  })
-  .delete(async (req, res) => {
-    try {
-      const { courseId } = req.query;
-      await db.doc(`/courses/${courseId}`).delete();
-      res.json("Your course has been successfully deleted");
     } catch (error) {
       console.log(error);
     }
@@ -38,12 +29,9 @@ const handler = nc()
     try {
       const { courseId } = req.query;
       const { authToken, content } = req.body;
-
       const { uid } = await auth.verifyIdToken(authToken);
-      console.log({ uid, content });
-
       const courseRef = await db.collection("courses").doc(courseId).get();
-      console.log(courseRef.data().creator);
+
       if (courseRef.data().creator === uid) {
         await db.doc(`/courses/${courseId}`).update(content);
         let updatedCourse = await db.collection("courses").doc(courseId).get();
