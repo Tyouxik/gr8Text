@@ -6,15 +6,14 @@ import Link from "next/link";
 
 export default function BurgerMenu({ links }) {
   const [showContent, setShowContent] = useState(false);
-  const contentRef = useRef();
 
   const toggleBurger = () => {
     setShowContent(!showContent);
   };
 
   useEffect(() => {
-    function handler(event) {
-      if (!contentRef.current?.contains(event.target)) {
+    function handler() {
+      if (showContent) {
         setShowContent(false);
       }
     }
@@ -26,9 +25,7 @@ export default function BurgerMenu({ links }) {
     if (link.type === "link") {
       return (
         <li>
-          <Link onClick={() => setShowContent(false)} href={link.path}>
-            {link.label}
-          </Link>
+          <Link href={link.path}>{link.label}</Link>
         </li>
       );
     } else if (link.type === "button") {
@@ -41,13 +38,13 @@ export default function BurgerMenu({ links }) {
   });
 
   return (
-    <div className={_.burger_menu} ref={contentRef}>
+    <div className={_.burger_menu}>
       <button className={_.burger_btn} onClick={toggleBurger}>
         <GiHamburgerMenu />
       </button>
       {showContent && (
         <div className={_.burger_content}>
-          <ul onClick={() => setShowContent(false)}>{linkList}</ul>
+          <ul>{linkList}</ul>
         </div>
       )}
     </div>
