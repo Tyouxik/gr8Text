@@ -13,7 +13,7 @@ const handler = nc().get(async (req, res) => {
     return;
   }
   const courses = snapshot.docs.map(collectIdsAndData);
-  res.json(courses);
+  res.status(200).json(courses);
 });
 
 export default handler;

@@ -4,7 +4,6 @@ import { collectIdsAndData } from "../../../utils/utilities";
 
 const handler = nc()
   .get(async (req, res) => {
-    console.log("I am called");
     const { token } = req.headers;
     const { uid } = await auth.verifyIdToken(token);
     const coursesRef = await db
@@ -12,7 +11,7 @@ const handler = nc()
       .where("creator", "=", uid)
       .get();
     const courses = coursesRef.docs.map(collectIdsAndData);
-    res.json(courses);
+    res.status(200).json(courses);
   })
   .post(async (req, res) => {
     try {
@@ -35,7 +34,7 @@ const handler = nc()
       const docRef = await db.collection("courses").add(course);
       const doc = await docRef.get();
       const newCourse = collectIdsAndData(doc);
-      res.json(newCourse);
+      res.status(200).json(newCourse);
     } catch (err) {
       console.log(err);
     }
