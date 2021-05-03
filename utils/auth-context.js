@@ -26,7 +26,7 @@ function useProvideAuth() {
 
   const clear = () => {
     setAuth(null);
-    setLoading(true);
+    setLoading(false);
   };
 
   const collectUserData = (user) => {
