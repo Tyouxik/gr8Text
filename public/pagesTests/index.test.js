@@ -1,6 +1,6 @@
-import Home from "./index";
+import Home from "../../pages/index";
 import { shallow } from "enzyme";
-import { findByTestAttr } from "../test/testutils";
+import { findByTestAttr } from "../../test/testutils";
 
 const setup = () => {
   return shallow(<Home />);
