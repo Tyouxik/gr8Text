@@ -8,7 +8,7 @@ export default function courses() {
 
   useEffect(async () => {
     const courses = await axios.get(`/api/courses`);
-    setCourses(courses.data);
+    setCourses(courses.data.courses);
   }, []);
 
   return (
