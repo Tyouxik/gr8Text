@@ -22,10 +22,10 @@ export default function Course() {
 
   return (
     <CourseProvider>
-      <main className={styles.gridContainer}>
-        <CourseDescript />
-        <CourseLessonPlan />
-        <LessonContent />
+      <main className={styles.coursePage}>
+        <CourseDescript className={styles.descript} />
+        <CourseLessonPlan className={styles.plan} />
+        <LessonContent className={styles.content} />
       </main>
     </CourseProvider>
   );

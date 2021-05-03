@@ -118,19 +118,21 @@ function CourseDescriptEdit({ setEdit }) {
           <textarea
             name="description"
             id="description"
-            cols="35"
-            rows="5"
+            cols="80"
+            rows="8"
             value={newDescription}
             onChange={onHandleChange}
           ></textarea>
         </label>
       </div>
-      <button className={styleBtn.edit_btn} onClick={onSave}>
-        Save
-      </button>
-      <button className={styleBtn.edit_btn} onClick={onCancel}>
-        Cancel
-      </button>
+      <div className={styles.courseDescript_btns}>
+        <button className={styleBtn.edit_btn} onClick={onSave}>
+          Save
+        </button>
+        <button className={styleBtn.edit_btn} onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }
