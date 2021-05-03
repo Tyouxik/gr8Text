@@ -1,10 +1,10 @@
-import Navbar from "./Navbar";
-//Test the main use cases for compone
+/* import Navbar from "./Navbar";
+import { shallow } from "enzyme";
+//Test the main use cases for component
 
-//signin
-//happy test
-//Test the form, test the form is
-//what if that's true and what if it false
+const setup = () => {
+  return shallow(<Navbar />);
+}; */
 
 test.todo("renders without error");
 test.todo("if auth is true, display navbarloggedin");
