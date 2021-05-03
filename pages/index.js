@@ -3,6 +3,7 @@ import styles from "../styles/Home.module.scss";
 import HeroTriangleDown from "../public/Atoms/HeroTriangleDown";
 import HeroTriangleLeft from "../public/Atoms/HeroTriangleLeft";
 import HeroRectangle from "../public/Atoms/HeroRectangle";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -11,20 +12,17 @@ export default function Home() {
         <title>Gr8Courses</title>
       </Head>
 
-      <div>
+      <div data-test="home-component">
         <HeroTriangleDown>
-          <h1>Welcome to CourseBuilder</h1>
+          <h1 data-test="welcome-title">Welcome to CourseBuilder</h1>
         </HeroTriangleDown>
         <HeroRectangle>
-          <h2>Discover our courses</h2>
-          <h2>Here they are</h2>
-        </HeroRectangle>
-        <HeroTriangleDown>
-          <h2>Discover our courses</h2>
-        </HeroTriangleDown>
-        <HeroRectangle>
-          <h2>Discover our courses</h2>
-          <h2>Here they are</h2>
+          <Link href="/courses">
+            <h2>Discover our courses</h2>
+          </Link>
+          <Link href="/dashboard">
+            <h2>Create your own course</h2>
+          </Link>
         </HeroRectangle>
       </div>
     </>
