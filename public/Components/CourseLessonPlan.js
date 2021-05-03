@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../../styles/course.module.scss";
 import { useCourse } from "../../utils/course-context";
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
@@ -11,6 +11,13 @@ export default function CourseLessonPlan() {
     toggleActiveLesson,
   } = useCourse();
   const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth >= 800) {
+      setShowContent(true);
+    }
+  }, []);
+
   if (!lessons) return <></>;
 
   const lessonPlan = () => {

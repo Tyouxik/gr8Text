@@ -43,7 +43,7 @@ export default function index() {
         <p>{course.description}</p>
       </header>
       <section className={_.lessons}>
-        <details>
+        <details open>
           <summary>
             <h2>Lessons: {selectedLesson ? selectedLesson.title : ""}</h2>
           </summary>

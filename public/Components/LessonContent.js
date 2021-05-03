@@ -33,7 +33,7 @@ export default function lessonContent() {
 
   if (!activeLesson) {
     return (
-      <div className={styles.editor}>
+      <div className={styles.courseContent}>
         <p> Select a Lesson</p>
         <p>View the Lesson as a student would</p>
         <p>Switch to edit mode, to edit your Lesson</p>
@@ -42,7 +42,7 @@ export default function lessonContent() {
     );
   } else {
     return (
-      <div className={styles.editor}>
+      <div className={styles.courseContent}>
         <ToggleSwitch
           toggleState={isEditable}
           toggleStateFunction={setIsEditable}
