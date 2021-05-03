@@ -11,7 +11,7 @@ export default function ContentViewer({ content }) {
     setEditorState(() =>
       EditorState.createWithContent(convertFromRaw(content))
     );
-  }, []);
+  }, [content]);
 
   return (
     <div style={styles.editor}>
