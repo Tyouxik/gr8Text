@@ -5,18 +5,19 @@ import Logo from "../Atoms/Logo";
 import NavLinks from "../Atoms/NavLinks";
 import LoginBtn from "../Atoms/LoginBtn";
 import SignupBtn from "../Atoms/SignupBtn";
+import BurgerMenu from "../Atoms/BurgerMenu";
 
 export default function NavbarLoggedOut() {
-  const links = [{ label: "Courses", path: "/courses" }];
+  const links = [
+    { type: "link", label: "Courses", path: "/courses" },
+    { type: "link", label: "Login", path: "/login" },
+    { type: "link", label: "Signup", path: "/signup" },
+  ];
 
   return (
     <div className={styles.flexContainer}>
       <Logo className={styles.logo} />
-      <NavLinks links={links} className={styles.Links} />
-      <div className={styles.buttons}>
-        <LoginBtn className={styles.LoginBtn} />
-        <SignupBtn className={styles.SignupBtn} />
-      </div>
+      <BurgerMenu links={links} />
     </div>
   );
 }
