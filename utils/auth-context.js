@@ -110,6 +110,7 @@ function useProvideAuth() {
     auth,
     loading,
     errMessage,
+    setErrMessage,
     signupWithEmailAndPassword,
     signinWithEmailAndPassword,
     signInWithGoogle,

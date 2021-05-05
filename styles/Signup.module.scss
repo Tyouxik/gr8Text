@@ -3,8 +3,7 @@
 .mainContainer {
   height: 100vh;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
@@ -17,7 +16,7 @@
   min-width: fit-content;
   max-width: 400px;
   height: 60%;
-  border: 2px dotted $primary;
+
   padding: 20px;
   border-radius: 15px;
 
@@ -54,12 +53,15 @@
 
   & .socialWrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
 
     button {
       padding: 5px 15px;
       border-radius: 10px;
+      flex-basis: 50%;
+      font-size: 2rem;
+      background-color: $primary;
+      color: $white;
     }
   }
 }
