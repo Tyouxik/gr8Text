@@ -23,7 +23,6 @@ export default function signup() {
     if (auth) {
       router.push("/courses");
     }
-    setErrMessage("");
   }, [auth, loading]);
 
   const onChange = (e) => {

@@ -40,10 +40,14 @@ export default function signup() {
     <>
       <div className={styles.mainContainer}>
         <div className={styles.signupContainer}>
-          <ErrorMessage>{errMessage}</ErrorMessage>
+          <div className={styles.socialWrapper}>
+            <button onClick={signInWithGoogle}>Google</button>
+          </div>
+          <p>OR</p>
+
           <div className={styles.emailWrapper}>
             <input
-              type="text"
+              type="email"
               name="email"
               id="email"
               placeholder="Email"
@@ -56,12 +60,8 @@ export default function signup() {
               placeholder="Password"
               onChange={onChange}
             />
+            <ErrorMessage>{errMessage}</ErrorMessage>
             <button onClick={signinWithEmail}>Login</button>
-          </div>
-          <p>OR</p>
-          <div className={styles.socialWrapper}>
-            <button onClick={signInWithGoogle}>Google</button>
-            <button>Github</button>
           </div>
         </div>
       </div>
