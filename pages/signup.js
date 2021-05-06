@@ -25,6 +25,12 @@ export default function signup() {
     }
   }, [auth, loading]);
 
+  useEffect(() => {
+    return () => {
+      setErrMessage("");
+    };
+  }, []);
+
   const onChange = (e) => {
     if (e.target.name === "email") {
       setEmail(e.target.value);
@@ -35,13 +41,13 @@ export default function signup() {
     }
   };
 
-  const signupWithEmail = () => {
+  const signupWithEmail = async () => {
     if (password !== repeatPassword) {
       setErrMessage("Enter same password");
       setPassword("");
       setRepeatPassword("");
     } else {
-      signupWithEmailAndPassword(email, password);
+      await signupWithEmailAndPassword(email, password);
       setEmail("");
       setPassword("");
       setRepeatPassword("");

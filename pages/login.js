@@ -4,7 +4,7 @@ import styles from "../styles/Signup.module.scss";
 import { useAuth } from "../utils/auth-context";
 import ErrorMessage from "../public/Atoms/ErrorMessage";
 
-export default function signup() {
+export default function login() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,6 +14,7 @@ export default function signup() {
     auth,
     loading,
     errMessage,
+    setErrMessage,
   } = useAuth();
 
   useEffect(() => {
@@ -21,6 +22,12 @@ export default function signup() {
       router.push("/courses");
     }
   }, [auth, loading]);
+
+  useEffect(() => {
+    return () => {
+      setErrMessage("");
+    };
+  }, []);
 
   const onChange = (e) => {
     if (e.target.name === "email") {
@@ -30,8 +37,9 @@ export default function signup() {
     }
   };
 
-  const signinWithEmail = () => {
-    signinWithEmailAndPassword(email, password);
+  const signinWithEmail = async () => {
+    const response = await signinWithEmailAndPassword(email, password);
+    console.log(response);
     setEmail("");
     setPassword("");
   };

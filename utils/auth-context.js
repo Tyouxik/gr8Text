@@ -64,25 +64,31 @@ function useProvideAuth() {
     }
   };
 
-  const signupWithEmailAndPassword = async (email, password) => {
-    try {
-      firebaseAuth.createUserWithEmailAndPassword(email, password);
-    } catch (error) {
-      let errorCode = error.code;
-      let errorMessage = error.message;
-      setErrMessage(errorMessage);
-    }
+  const signupWithEmailAndPassword = (email, password) => {
+    firebaseAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((resp) => {
+        console.log({ resp });
+      })
+      .catch((err) => {
+        let errorCode = err.code;
+        let errorMessage = err.message;
+        setErrMessage(errorMessage);
+      });
   };
 
   const signinWithEmailAndPassword = (email, password) => {
-    try {
-      setLoading(true);
-      firebaseAuth.signInWithEmailAndPassword(email, password);
-    } catch (error) {
-      let errorCode = error.code;
-      let errorMessage = error.message;
-      setErrMessage(errorMessage);
-    }
+    setLoading(true);
+    firebaseAuth
+      .signInWithEmailAndPassword(email, password)
+      .then((resp) => {
+        console.log({ resp });
+      })
+      .catch((err) => {
+        let errorCode = err.code;
+        let errorMessage = err.message;
+        setErrMessage(errorMessage);
+      });
   };
 
   const signInWithGoogle = async () => {
@@ -97,7 +103,7 @@ function useProvideAuth() {
       firebaseAuth.signOut();
       clear();
     } catch (error) {
-      setMessage(error.message);
+      setErrMessage(error.message);
     }
   };
 
