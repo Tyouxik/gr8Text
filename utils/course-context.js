@@ -22,7 +22,6 @@ function useProvideCourse() {
   const [lessons, setLessons] = useState();
   const [activeLesson, setActiveLesson] = useState();
   const [newLessonTitle, setNewLessonTitle] = useState("");
-  const [isEditable, setIsEditable] = useState(false);
 
   useEffect(async () => {
     const snapshot = await axios.get(`/api/course/${courseId}`);
@@ -44,7 +43,6 @@ function useProvideCourse() {
   };
 
   const deleteLesson = async (id) => {
-    console.log(auth.token);
     await axios.post(`/api/course/${courseId}/lesson/${id}/deleteLesson`, {
       token: auth.token,
     });
@@ -53,9 +51,6 @@ function useProvideCourse() {
   };
 
   const updateLesson = async (key, content) => {
-    console.log(
-      JSON.stringify(content) !== JSON.stringify(activeLesson.content)
-    );
     if (
       key === "content" &&
       JSON.stringify(content) !== JSON.stringify(activeLesson.content)
@@ -92,10 +87,8 @@ function useProvideCourse() {
   };
 
   const toggleActiveLesson = (id) => {
-    if (!isEditable) {
-      const lesson = lessons.filter((lesson) => lesson.id === id)[0];
-      setActiveLesson(lesson);
-    }
+    const lesson = lessons.filter((lesson) => lesson.id === id)[0];
+    setActiveLesson(lesson);
   };
 
   return {
@@ -107,8 +100,6 @@ function useProvideCourse() {
     setActiveLesson,
     newLessonTitle,
     setNewLessonTitle,
-    isEditable,
-    setIsEditable,
     addLesson,
     deleteLesson,
     updateLesson,

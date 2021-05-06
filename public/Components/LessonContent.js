@@ -1,12 +1,11 @@
 import React from "react";
 import styles from "../../styles/course.module.scss";
-import ToggleSwitch from "../Atoms/ToggleSwitch";
 import { useState, useEffect } from "react";
 import ContentEditor from "./ContentEditor";
 import { useCourse } from "../../utils/course-context";
 
 export default function lessonContent() {
-  const { activeLesson, updateLesson, isEditable, setIsEditable } = useCourse();
+  const { activeLesson, updateLesson } = useCourse();
 
   if (!activeLesson) {
     return <></>;
@@ -43,10 +42,6 @@ export default function lessonContent() {
   } else {
     return (
       <div className={styles.courseContent}>
-        <ToggleSwitch
-          toggleState={isEditable}
-          toggleStateFunction={setIsEditable}
-        />
         <ContentEditor
           lessonContent={lessonContent}
           setLessonContent={setLessonContent}

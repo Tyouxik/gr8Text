@@ -14,7 +14,7 @@ import { blockRenderer } from "./EditorUtils";
 import { useCourse } from "../../utils/course-context";
 
 export default function ContentEditor({ lessonContent, setLessonContent }) {
-  const { isEditable, activeLesson } = useCourse();
+  const { activeLesson } = useCourse();
 
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -23,15 +23,6 @@ export default function ContentEditor({ lessonContent, setLessonContent }) {
   const [urlType, setUrlType] = useState("");
   const [showMediaUrlInput, setShowMediaUrlInput] = useState(false);
   const [altText, setAltText] = useState("");
-
-  useEffect(() => {
-    if (!isEditable) {
-      setUrl("");
-      setUrlType("");
-      setShowMediaUrlInput(false);
-      setAltText("");
-    }
-  }, [isEditable]);
 
   useEffect(() => {
     if (activeLesson.content) {
@@ -91,14 +82,13 @@ export default function ContentEditor({ lessonContent, setLessonContent }) {
 
   return (
     <div style={styles.root}>
-      {isEditable && (
-        <EditorToolbar
-          editorState={editorState}
-          onBlockToggle={onBlockToggle}
-          onInlineToggle={onInlineToggle}
-          promptForMedia={promptForMedia}
-        />
-      )}
+      <EditorToolbar
+        editorState={editorState}
+        onBlockToggle={onBlockToggle}
+        onInlineToggle={onInlineToggle}
+        promptForMedia={promptForMedia}
+      />
+
       {showMediaUrlInput && isEditable && (
         <MediaUrlInput
           url={url}
@@ -111,7 +101,6 @@ export default function ContentEditor({ lessonContent, setLessonContent }) {
       )}
       <div style={styles.editor} onClick={focus}>
         <Editor
-          readOnly={!isEditable}
           editorState={editorState}
           onChange={(e) => onChange(e)}
           blockRendererFn={blockRenderer}
