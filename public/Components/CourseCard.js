@@ -3,14 +3,6 @@ import styles from "../../styles/courses.module.scss";
 import Link from "next/link";
 import CourseInfoTag from "./CourseInfoTag";
 
-const aTag = React.forwardRef(({ onClick, href, children }, ref) => {
-  return (
-    <a href={href} onClick={onClick} ref={ref}>
-      {children}
-    </a>
-  );
-});
-
 export default function CourseCard({ course, link }) {
   const courseInfo = [
     { icon: "../images/access_icon.svg", text: course.access },

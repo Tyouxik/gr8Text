@@ -11,7 +11,7 @@ import Link from "next/link";
 
 export default function dashboard() {
   const router = useRouter();
-  const [courses, setCourses] = useState([{}]);
+  const [courses, setCourses] = useState([]);
   const { auth, loading } = useAuth();
 
   useEffect(() => {

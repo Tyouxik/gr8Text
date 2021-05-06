@@ -26,8 +26,7 @@
   }
 
   &:hover {
-    border: 1px solid $primary;
-    flex-grow: 1;
+    border: 2px solid $primary;
     transition-duration: 4s;
   }
 }
