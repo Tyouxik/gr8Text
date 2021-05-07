@@ -1,0 +1,46 @@
+@import "colors";
+
+.inputComponent {
+  border: 1px solid $primary;
+  border-top: 1px solid $white;
+  padding: 0.25rem 0.5rem 1rem 0.5rem;
+
+  p {
+    font-size: 1.5rem;
+    margin: 1rem 0rem;
+  }
+
+  form {
+    display: flex;
+    flex-flow: column nowrap;
+    font-size: 2rem;
+    input {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+    }
+  }
+  details {
+    margin-bottom: 1rem;
+    p {
+      padding-left: 2rem;
+    }
+  }
+
+  summary {
+    font-size: 1.5rem;
+  }
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: space-around;
+
+  button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: $primary;
+    color: $white;
+    border-radius: 15px;
+    font-size: 1.5rem;
+  }
+}

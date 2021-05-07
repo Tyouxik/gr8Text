@@ -1,4 +1,5 @@
 import React from "react";
+import _ from "../../styles/urlInput.module.scss";
 
 export default function MediaUrlInput({
   url,
@@ -7,6 +8,7 @@ export default function MediaUrlInput({
   altText,
   setAltText,
   confirmMedia,
+  setShowMediaUrlInput,
 }) {
   const onUrlInputKeyDown = (e) => {
     if (e.which === 13) {
@@ -20,34 +22,70 @@ export default function MediaUrlInput({
     setAltText(e.target.value);
   };
 
-  let message;
-  if (urlType === "image") {
-    message =
-      "Add a link to your photo and an alternative text, it works with Unsplash";
-  } else if (urlType === "video") {
-    message =
-      "Add a link to your video and an alternative text, it works with Youtube :)";
-  }
+  const clearInput = () => {
+    setUrl("");
+    setAltText("");
+    setShowMediaUrlInput(false);
+  };
+
+  let message = () => {
+    if (urlType === "image") {
+      return (
+        <p>
+          Add a link to your photo and an alternative text, it works with
+          Unsplash
+        </p>
+      );
+    } else if (urlType === "video") {
+      return (
+        <p>
+          Add a link to your video and an alternative text, it works with
+          Youtube :)
+        </p>
+      );
+    } else if (urlType === "google") {
+      return (
+        <div>
+          <p>You can add Google slides, Google sheets and Google docs</p>
+          <details>
+            <summary>First publish it on the web</summary>
+            <p>In your Google document, go to File/Publish to the web</p>
+            <p>In the link tab, click on Publish</p>
+          </details>
+          <p>Paste the link from the Link tab in the Publish to web pop up.</p>
+          <p>Copy it below</p>
+        </div>
+      );
+    }
+  };
+
   return (
-    <div>
-      <p>{message}</p>
-      <input
-        onChange={onUrlChange}
-        /* ref="url" */
-        type="text"
-        placeholder="Add a link"
-        value={url}
-        onKeyDown={onUrlInputKeyDown}
-      />
-      <input
-        onChange={onTextChange}
-        /* ref="url" */
-        type="text"
-        placeholder="Don't forget the alternative text"
-        value={altText}
-        onKeyDown={onUrlInputKeyDown}
-      />
-      <button onMouseDown={confirmMedia}>Confirm</button>
+    <div className={_.inputComponent}>
+      {message()}
+      <form>
+        <input
+          onChange={onUrlChange}
+          /* ref="url" */
+          type="text"
+          placeholder="Add a link"
+          value={url}
+          onKeyDown={onUrlInputKeyDown}
+        />
+        {urlType !== "google" && (
+          <input
+            onChange={onTextChange}
+            /* ref="url" */
+            type="text"
+            placeholder="Don't forget the alternative text"
+            value={altText}
+            onKeyDown={onUrlInputKeyDown}
+          />
+        )}
+        <div className={_.btnContainer}>
+          <button onMouseDown={confirmMedia}>Confirm</button>
+          <button onMouseDown={clearInput}>Cancel</button>
+        </div>
+      </form>
     </div>
   );
 }

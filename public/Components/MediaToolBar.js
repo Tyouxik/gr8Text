@@ -1,6 +1,6 @@
 import React from "react";
-import { FaImage, FaVideo, FaSlideshare } from "react-icons/fa";
-import { SiGooglesheets } from "react-icons/si";
+import { FaImage, FaVideo } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import ToolbarBtn from "../Atoms/ToolbarBtn";
 
 function MediaToolBar({ promptForMedia }) {
@@ -19,8 +19,7 @@ function MediaToolBar({ promptForMedia }) {
 const mediaTypes = [
   { label: <FaImage />, type: "image" },
   { label: <FaVideo />, type: "video" },
-  { label: <FaSlideshare />, type: "googleSlide" },
-  { label: <SiGooglesheets />, type: "googleSlide" },
+  { label: <FcGoogle />, type: "google" },
 ];
 
 //Media components
@@ -35,7 +34,7 @@ function Media({ contentState, block }) {
     media = <Image src={src} alt={alt} />;
   } else if (type === "video") {
     media = <Video src={src} alt={alt} />;
-  } else if (type === "googleSlide") {
+  } else if (type === "google") {
     media = <GoogleSlide src={src} />;
   }
   return media;
@@ -67,7 +66,7 @@ const Video = ({ src, alt }) => {
   }
 };
 
-const GoogleSlide = ({ src, alt }) => {
+const GoogleSlide = ({ src }) => {
   const slideSrc = src.replace("pub?", "embed?");
   return (
     <iframe

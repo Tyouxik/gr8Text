@@ -66,7 +66,6 @@ export default function ContentEditor({ lessonContent, setLessonContent }) {
       "IMMUTABLE",
       { src: url, alt: altText }
     );
-    console.log(contentStateWithEntity, "this is my block");
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
     const newEditorState = EditorState.set(editorState, {
       currentContent: contentStateWithEntity,
@@ -89,7 +88,7 @@ export default function ContentEditor({ lessonContent, setLessonContent }) {
         promptForMedia={promptForMedia}
       />
 
-      {showMediaUrlInput && isEditable && (
+      {showMediaUrlInput && (
         <MediaUrlInput
           url={url}
           urlType={urlType}
@@ -97,6 +96,7 @@ export default function ContentEditor({ lessonContent, setLessonContent }) {
           altText={altText}
           setAltText={setAltText}
           confirmMedia={confirmMedia}
+          setShowMediaUrlInput={setShowMediaUrlInput}
         />
       )}
       <div style={styles.editor} onClick={focus}>

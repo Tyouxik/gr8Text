@@ -12,10 +12,6 @@ export default function EditorToolbar({
 }) {
   return (
     <div className={styles.toolbars}>
-      <MediaToolBar
-        className={styles.toolbar}
-        promptForMedia={promptForMedia}
-      />
       <BlockToolBar
         className={styles.toolbar}
         editorState={editorState}
@@ -24,6 +20,10 @@ export default function EditorToolbar({
       <InlineToolBar
         className={styles.toolbar}
         onInlineToggle={onInlineToggle}
+      />
+      <MediaToolBar
+        className={styles.toolbar}
+        promptForMedia={promptForMedia}
       />
     </div>
   );
