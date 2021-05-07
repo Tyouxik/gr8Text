@@ -12,6 +12,7 @@ import EditorToolbar from "./EditorToolbar";
 import MediaUrlInput from "./MediaUrlInput";
 import { blockRenderer } from "./EditorUtils";
 import { useCourse } from "../../utils/course-context";
+import _ from "../../styles/contentEditor.module.scss";
 
 export default function ContentEditor({ lessonContent, setLessonContent }) {
   const { activeLesson } = useCourse();
@@ -80,7 +81,7 @@ export default function ContentEditor({ lessonContent, setLessonContent }) {
   };
 
   return (
-    <div style={styles.root}>
+    <div className={_.container}>
       <EditorToolbar
         editorState={editorState}
         onBlockToggle={onBlockToggle}
@@ -99,7 +100,7 @@ export default function ContentEditor({ lessonContent, setLessonContent }) {
           setShowMediaUrlInput={setShowMediaUrlInput}
         />
       )}
-      <div style={styles.editor} onClick={focus}>
+      <div className={_.editor} onClick={focus}>
         <Editor
           editorState={editorState}
           onChange={(e) => onChange(e)}
@@ -120,9 +121,5 @@ const styles = {
     cursor: "text",
     minHeight: 80,
     padding: 0,
-  },
-  button: {
-    marginTop: 10,
-    textAlign: "center",
   },
 };

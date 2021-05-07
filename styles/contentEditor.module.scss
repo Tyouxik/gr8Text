@@ -1,4 +1,6 @@
-.dropdownContent {
+@import "colors";
+
+/* .dropdownContent {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -18,4 +20,22 @@
   font-weight: 300;
   font-size: 1em;
   padding-top: 5px;
+}
+ */
+
+.container {
+  font-family: inherit;
+  padding: 2rem;
+}
+
+.editor {
+  border: 1px solid $lightGrey;
+  cursor: text;
+  min-height: 20rem;
+  padding: 0rem;
+}
+
+//Content Viewer
+.noContent {
+  padding: 1rem;
 }

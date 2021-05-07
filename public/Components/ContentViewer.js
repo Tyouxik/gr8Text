@@ -1,20 +1,33 @@
 import React, { useState, useEffect } from "react";
-import { Editor, EditorState, convertFromRaw } from "draft-js";
+import { Editor, EditorState, convertFromRaw, createFromText } from "draft-js";
 import { blockRenderer } from "./EditorUtils";
+import _ from "../../styles/contentEditor.module.scss";
 
 export default function ContentViewer({ content }) {
   const [editorState, setEditorState] = useState(() =>
-    EditorState.createWithContent(convertFromRaw(content))
+    EditorState.createEmpty()
   );
 
   useEffect(() => {
-    setEditorState(() =>
-      EditorState.createWithContent(convertFromRaw(content))
-    );
+    if (content) {
+      setEditorState(() =>
+        EditorState.createWithContent(convertFromRaw(content))
+      );
+    } else {
+    }
   }, [content]);
 
+  if (!content) {
+    return (
+      <div className={_.noContent}>
+        <h1>Oops this lesson is empty</h1>
+        <p>Sorry about that, we are working on it</p>
+      </div>
+    );
+  }
+
   return (
-    <div style={styles.editor}>
+    <div className={_.editor}>
       <Editor
         readOnly={true}
         editorState={editorState}
@@ -23,20 +36,3 @@ export default function ContentViewer({ content }) {
     </div>
   );
 }
-
-const styles = {
-  root: {
-    fontFamily: "'Helvetica', sans-serif",
-    padding: 20,
-  },
-  editor: {
-    border: "1px solid #ccc",
-    cursor: "text",
-    minHeight: 80,
-    padding: 10,
-  },
-  button: {
-    marginTop: 10,
-    textAlign: "center",
-  },
-};
