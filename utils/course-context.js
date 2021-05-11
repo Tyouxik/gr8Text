@@ -69,6 +69,22 @@ function useProvideCourse() {
       });
       setLessons(newLessons);
     }
+
+    if (key === "title") {
+      const lessonRef = await axios.post(
+        `/api/course/${courseId}/lesson/${activeLesson.id}`,
+        { key, content }
+      );
+      setActiveLesson(lessonRef.data);
+      const newLessons = lessons.map((lesson) => {
+        console.log(lesson.id === lessonRef.data.id);
+        if (lesson.id === lessonRef.data.id) {
+          return lessonRef.data;
+        }
+        return lesson;
+      });
+      setLessons(newLessons);
+    }
   };
 
   const deleteCourse = async () => {

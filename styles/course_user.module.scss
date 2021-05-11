@@ -46,7 +46,7 @@
   .wrapper {
     display: grid;
     grid-template-columns: 0.4fr 1.1fr;
-    grid-template-rows: 0.5fr 1fr;
+    grid-template-rows: auto-fit 1fr;
     gap: 0px 0px;
     header {
       grid-area: 1 / 1 / 2 / 3;
