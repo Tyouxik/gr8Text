@@ -1,22 +1,36 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/course.module.scss";
 import { useCourse } from "../../utils/course-context";
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from "react-icons/ai";
+import {
+  AiOutlinePlusCircle,
+  AiOutlineMinusCircle,
+  AiFillEdit,
+  AiOutlineCheckCircle,
+} from "react-icons/ai";
 
 export default function CourseLessonPlan() {
   const {
     lessons,
     activeLesson,
     deleteLesson,
+    updateLesson,
     toggleActiveLesson,
   } = useCourse();
   const [showContent, setShowContent] = useState(false);
+  const [showInput, setShowInput] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
 
   useEffect(() => {
     if (window.innerWidth >= 800) {
       setShowContent(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (activeLesson) {
+      setNewTitle(activeLesson.title);
+    }
+  }, [activeLesson]);
 
   if (!lessons) return <></>;
 
@@ -28,12 +42,37 @@ export default function CourseLessonPlan() {
       } else {
         style = `${styles.lesson}`;
       }
-      return (
-        <li className={style} onClick={() => toggleActiveLesson(lesson.id)}>
-          <h3>{lesson.title}</h3>
-          <AiOutlineMinusCircle onClick={() => deleteLesson(lesson.id)} />
-        </li>
-      );
+      if (showInput && activeLesson.id === lesson.id) {
+        return (
+          <li className={style} onClick={() => toggleActiveLesson(lesson.id)}>
+            <input
+              value={newTitle}
+              onChange={(e) => {
+                setNewTitle(e.target.value);
+              }}
+            />
+            <AiOutlineCheckCircle
+              onClick={() => {
+                updateLesson("title", newTitle);
+                setShowInput(false);
+              }}
+            />
+            <AiOutlineMinusCircle onClick={() => deleteLesson(lesson.id)} />
+          </li>
+        );
+      } else {
+        return (
+          <li className={style} onClick={() => toggleActiveLesson(lesson.id)}>
+            <h3>{lesson.title}</h3>
+            <AiFillEdit
+              onClick={() => {
+                setShowInput(true);
+              }}
+            />
+            <AiOutlineMinusCircle onClick={() => deleteLesson(lesson.id)} />
+          </li>
+        );
+      }
     });
 
     return (
@@ -51,6 +90,7 @@ export default function CourseLessonPlan() {
 
   return (
     <>
+      {console.log(activeLesson)}
       <div className={styles.coursePlan}>
         <button className={styles.lessonTitle} onClick={toggleContent}>
           <h2>Lesson plan</h2>
