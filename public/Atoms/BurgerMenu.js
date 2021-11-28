@@ -1,4 +1,3 @@
-import { isLocalURL } from "next/dist/next-server/lib/router/router";
 import React, { useState, useEffect, useRef } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import _ from "../../styles/burgermenu.module.scss";
